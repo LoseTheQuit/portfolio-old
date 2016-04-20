@@ -1,0 +1,101 @@
+<style>
+    body {}
+    
+    .bodyWrapper {
+        background: #fff;
+        background: #3399FF url("../img/cp.jpg") no-repeat;
+        background: #3399FF;
+        background-size: cover;
+        height: 100%;
+    }
+    
+    .tweetCard {
+        min-height: 305px;
+    }
+    
+    .tweetData {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        padding: 25px;
+        color: #fff;
+        background: rgba(0, 0, 0, .5);
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .displayBlock {
+        display: block;
+    }
+    
+    .headLine {
+        font-size: 77px;
+        margin-bottom: 25px;
+    }
+    
+    .textBox {
+        padding: 10px;
+        border: solid 1px rgba(0, 0, 0, .25);
+        box-shadow: inset 0 0 0 1px #707070;
+        transition: box-shadow 0.3s, border 0.3s;
+        margin-bottom: 50px;
+    }
+    
+    .textBox:focus,
+    .textBox input[type="text"].focus {
+        border: solid 1px rgba(0, 0, 0, .50);
+    }
+    
+    .ghostButton {
+        border: 1px solid #fff;
+        color: #fff;
+        width: 200px;
+        height: 50px;
+        font-size: 19px;
+        line-height: 50px;
+        cursor: pointer;
+    }
+    
+    .ghostButtonText {
+        text-decoration: none;
+    }
+</style>
+
+<div class="bodyWrapper">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 headLine">
+                <h1 class="headLine">Twitter search: </h1>
+            </div>
+
+            <div class="col-xs-12 headLine">
+
+                <!-- <a href="{{igRequestUri}}"> -->
+                <div ng-click="getInstagramNested()" class="ghostButton">
+                    <center class="ghostButtonText">initiiize IG</center>
+                </div>
+
+
+            </div>
+
+            <div class="col-xs-12">
+
+                <input class="textBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
+            </div>
+
+            <div class="col-md-3 col-xs-6 tweetCard" ng-repeat="tweets in twitterdata">
+
+                <div class="tweetData">
+                    <p>{{tweets.created_at}}</p>
+                    <p>{{tweets.user.name}}</p>
+                    <p>{{tweets.text}}</p>
+                    <p>Retweet count: {{tweets.retweet_count}}</p>
+                    <a class="displayBlock" href="{{tweets.user.url}">{{tweets.user.url}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

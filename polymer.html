@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Polymer Test</title>
+
+
+    <script src="./bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="./bower_components/polymer/polymer.html">
+
+</head>
+
+<body>
+
+    <polymer-element name="x-foo" noscript>
+        <template>
+            <h1>Hello from x-foo</h1>
+        </template>
+    </polymer-element>
+
+    <x-foo></x-foo>
+
+    <script>
+        // register a new element called proto-element
+        Polymer({
+            is: "proto-element",
+            // add a callback to the element's prototype
+            ready: function () {
+                this.textContent = "I'm a proto-element. Check out my prototype!"
+            }
+        });
+    </script>
+
+    <proto-element></proto-element>
+
+</body>
+
+</html>

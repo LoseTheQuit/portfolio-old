@@ -1,0 +1,24 @@
+{
+  "name": "deploy-this-now",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LTQ",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "bower": "^1.7.9",
+    "colors": "^1.1.2",
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "instagram-node": "^0.5.8",
+    "mongoose": "^4.4.12"
+  },
+  "engines": {
+    "node": "^5.10.1",
+    "npm": "^2.1.x"
+  }
+}

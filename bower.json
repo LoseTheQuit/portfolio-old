@@ -1,0 +1,27 @@
+{
+  "name": "deploy-this-now",
+  "description": "my-portfolio",
+  "main": "app.js",
+  "authors": [
+    "LTQ"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "lose",
+    "the",
+    "quit",
+    "bootstrap",
+    "polymer",
+    "mongodb",
+    "express",
+    "angular",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/LoseTheQuit/my-portfolio",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}

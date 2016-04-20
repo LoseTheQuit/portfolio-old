@@ -1,0 +1,24 @@
+<div ng-controller="custCtrl">
+    <h1 ng-class="helloWorld()">My TODOs</h1>
+    <div class="dividingLine"></div>
+    <h2 ng-class="saySomethingElse()">Enter stuff with ng-model:</h2>
+
+    <input type="text" ng-model="name">
+    <p>{{name}}</p>
+    <div ng-init="names=['Mark','Tom','Travis']"></div>
+    <h2>Looping with the ng-repeat</h2>
+    <h4>Internal list</h4>
+    <ul>
+        <li ng-repeat="personName in names">{{personName}}</li>
+    </ul>
+    <h4>External list</h4>
+    <input type="text" ng-model="cust">
+    <ul class="ulEdit">
+        <li ng-repeat="cust in customers | filter: cust | orderBy: 'name'">{{cust.name | uppercase}} works for {{cust.station | uppercase}} and lives in {{cust.city | uppercase}} </li>
+    </ul>
+
+    <ul>
+        <li ng-repeat="cust in customers | orderBy: 'city'">{{cust | uppercase}}</li>
+    </ul>
+
+</div>asd
