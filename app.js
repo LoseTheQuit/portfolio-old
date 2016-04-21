@@ -1,47 +1,36 @@
 'use strict';
-//var Client = require('node-rest-client').Client;
-//var client = new Client();
-var fs = require('fs');
-var colors = require('colors');
-var express = require('express');
-var mongoose = require('mongoose');
-var app = express();
-var bodyParser = require('body-parser');
-var Twitter = require('twitter');
+
+let fs = require('fs'),
+    colors = require('colors'),
+    express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    https = require('https'),
+    http = require('http'),
+    Twitter = require('twitter');
 
 
+let client_id = "b23670e220f14f1c89c11f627c9f9953";
+let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+let redirect_uri = 'http://localhost:5000/views/initShell.html';
+var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
+
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(express.static('static'));
 
-app.use(bodyParser.json({
-    type: 'application/*+json'
-}));
-
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-
-app.use(bodyParser.json())
-
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
-
-app.set('port', (process.env.PORT || 5000));
-
-app.get('/', function (req, res) {
-
-    console.log('INCOMING GET REQUEST - Load Template');
-    var html = fs.readFileSync('static/views/shell.html');
-    res.end(html);
-
+var twitterClient = new Twitter({
+    consumer_key: 'qiQPf27ifq8tSBHCAqtu6iHLU',
+    consumer_secret: 'hMNZdyYyVT4SXTGbd60qE5WVe8wfO9no0mlvJNseRreJDumjQP',
+    access_token_key: '4882645629-rFYbk7Bz2tw4Z9QEAce62S8SY3MJRNS6HTy3tOk',
+    access_token_secret: 'Q4NhcvlrW81xQREPH4yQvOR9iwlSQqmC4AVOK9QQOiq7h'
 });
-https: //www.instagram.com/oauth/authorize/?client_id=e272444723924d49bb78da2b5e5c4dfd&redirect_uri=https://losethequit.herokuapp.com/views/mashupShell.html&response_type=code
-
-    var twitterClient = new Twitter({
-        consumer_key: 'qiQPf27ifq8tSBHCAqtu6iHLU',
-        consumer_secret: 'hMNZdyYyVT4SXTGbd60qE5WVe8wfO9no0mlvJNseRreJDumjQP',
-        access_token_key: '4882645629-rFYbk7Bz2tw4Z9QEAce62S8SY3MJRNS6HTy3tOk',
-        access_token_secret: 'Q4NhcvlrW81xQREPH4yQvOR9iwlSQqmC4AVOK9QQOiq7h'
-    });
 
 app.post('/twitter', function (req, res) {
 
@@ -79,125 +68,189 @@ app.post('/inputquery', function (req, res) {
     });
 
 });
+app.get('/', function (req, res) {
+
+    console.log('INCOMING GET REQUEST - Load Template');
+    var html = fs.readFileSync('static/views/shell.html');
+    res.end(html);
+
+});
+
+app.get('/authorize_user', function (req, res) {
+
+    console.log('\n');
+    console.log('*******************************************************'.black.bgWhite);
+    console.log('INCOMING GET - authorize_user - REQUEST - Load Template'.black.bgWhite);
+    console.log('*******************************************************'.black.bgWhite);
+    res.redirect(authorize_link);
+
+});
+
+app.set('port', (process.env.PORT || 5000));
 
 app.listen(app.get('port'), function () {
+
     console.log('\n');
     console.log('********************************************'.black.bgWhite);
     console.log("The frontend server is running on port 5000!".black.bgWhite);
     console.log('********************************************'.black.bgWhite);
     console.log('\n');
+
 });
-
-mongoose.connect('mongodb://localhost/test');
-
-
-var db = mongoose.connection;
-
-
-db.on('error', console.error.bind(console, 'connection error:'));
- 
-db.once('open', function () {
-    console.log("connect has been made")
-        // we're connected! 
-});
-
-var mongoConnection = mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/foobar');
-
-//
-
-var Client = require('node-rest-client').Client;
-
-var client = new Client();
-
-var base_ig_api_url = 'https://api.instagram.com/oauth/authorize/?client_id';
-var ig_client_id = 'e272444723924d49bb78da2b5e5c4dfd';
-var ig_redirect_url = '&redirect_uri=https://losethequit.herokuapp.com/views/mashupShell.html/handleauth';
-var response_type = '&response_type=code';
-var complete_ig_api_request = base_ig_api_url + ig_client_id + ig_redirect_url + response_type;
-// direct way 
-
 
 app.post('/ig', function (req, res, next) {
 
-    client.post(complete_ig_api_request, function (data, response) {
-        // parsed response body as js object 
-        //        console.log(data);
-        // raw response 
-        //       console.log(res);
+    console.log('\n');
+    console.log('*******************************************************'.black.bgGreen);
+    console.log('ACCESS_CODE: ' + req.body.token);
 
-        console.log(data.body);
+    let ACCESS_CODE = req.body.token;
 
-        for (let key in res) {
+    let request = require('request');
+
+    let post_data = {
+        'client_id': client_id,
+        'client_secret': client_secret,
+        'grant_type': 'authorization_code',
+        'redirect_uri': redirect_uri,
+        'code': ACCESS_CODE
+    };
+
+    var headers = {
+        'User-Agent': 'Super Agent/0.0.1',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
+
+    var post_options = {
+        url: 'https://api.instagram.com/oauth/access_token',
+        method: 'POST',
+        headers: headers,
+        form: post_data
+    };
 
 
-            //            console.log('KEY ' + key);
-            //            console.log('data ' + res[key]);
-        }
-    });
+    request(post_options, function (error, response, body) {
 
-});
+        var parsedBody = JSON.parse(body);
+        console.log('*******************************************************'.black.bgGreen);
+        console.log(parsedBody);
+        console.log('*******************************************************'.black.bgGreen);
 
-var http = require('http');
-var express = require('express');
-var api = require('instagram-node').instagram();
-var app = express();
-
-
-api.use({
-    client_id: 'e272444723924d49bb78da2b5e5c4dfd',
-    client_secret: '95196ee487154c46b9dcb662483aa509'
-});
-
-var redirect_uri = 'https://losethequit.herokuapp.com/views/mashupShell.html/handleauth';
-
-exports.authorize_user = function (req, res) {
-    res.redirect(api.get_authorization_url(redirect_uri, {
-        scope: ['likes'],
-        state: 'a state'
-    }));
-};
-
-exports.handleauth = function (req, res) {
-    api.authorize_user(req.query.code, redirect_uri, function (err, result) {
-        if (err) {
-            console.log(err.body);
-            res.send("Didn't work");
+        if (response.statusCode != 200) {
+            console.error(error);
         } else {
-            console.log('Yay! Access token is ' + result.access_token);
-            res.send('You made it!!');
+
+            console.log('ACCESS_TOKEN: ' + parsedBody.access_token);
+
+
+            // THESE DON'T WORK
+            var from_the_docs = {
+                url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + parsedBody.access_token,
+                method: 'GET'
+            };
+            var media_search = {
+                url: 'https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=' + parsedBody.access_token,
+                method: 'GET'
+            };
+
+            var popular_media_search = {
+                url: 'https://api.instagram.com/v1/media/popular?access_token=' + parsedBody.access_token,
+                method: 'GET'
+            };
+
+            var from_SO_search = {
+                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
+                    redirect_uri + '&access_token=' + parsedBody.access_token,
+                method: 'GET'
+            }
+            var from_SO_search = {
+                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
+                    redirect_uri + '&access_token=' + parsedBody.access_token,
+                method: 'GET'
+            }
+
+            var user_search_by_name = {
+                url: 'https://api.instagram.com/v1/users/search?q=cthagod&access_token=' + parsedBody.access_token,
+                method: 'GET'
+            }
+
+            //
+
+            // THESE WORK
+
+            var self_search = {
+                url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + parsedBody.access_token + '&count=3',
+                method: 'GET'
+            };
+
+            var popular_tag_search = {
+                url: 'https://api.instagram.com/v1/tags/search?q=red&access_token=' + parsedBody.access_token,
+                method: 'GET'
+            };
+
+            var popular_tag_search_tag_name = {
+                url: 'https://api.instagram.com/v1/tags/kim?access_token=' + parsedBody.access_token,
+                method: 'GET'
+            };
+            var popular_tag_search_tag_name_recent = {
+                url: 'https://api.instagram.com/v1/tags/food/media/recent?access_token=' + parsedBody.access_token + '&count=200',
+                method: 'GET'
+            };
+
+            //
+
+            //&min_id=678453535718114828_919796408
+            request(self_search, function (error, response, body) {
+                if (error && response.statusCode != 200) {
+                    console.error(error);
+                    res.send(error);
+                } else {
+                    var jsonobjArr = JSON.parse(body);
+                    console.log('*******************************************************'.black.bgGreen);
+                    console.log(jsonobjArr);
+                    console.log('*******************************************************'.black.bgGreen);
+                    res.send(jsonobjArr);
+                }
+            });
+
         }
     });
-};
 
-// This is where you would initially send users to authorize 
-app.get('/authorize_user', exports.authorize_user);
-// This is your redirect URI 
-app.get('/handleauth', exports.handleauth);
+});
 
-//app.post('/ig', function (req, res, next) {
-//    var ig = require('instagram-node').instagram({});
-//    //    ig.use({
-//    //        access_token: 'YOUR_ACCESS_TOKEN'
-//    //    });
+
+////https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=10
 //
-//    ig.use({
-//        client_id: 'e272444723924d49bb78da2b5e5c4dfd',
-//        client_secret: '95196ee487154c46b9dcb662483aa509'
-//    });
-//    //
-//    //    https: //api.instagram.com/oauth/authorize/?client_id=e272444723924d49bb78da2b5e5c4dfd&redirect_uri=https://losethequit.herokuapp.com/views/mashupShell.html&response_type=code 
-//    ig.add_like(req.body, {
-//        sign_request: {
-//            client_secret: '95196ee487154c46b9dcb662483aa509',
-//            // Then you can specify the request:
-//            client_req: req,
-//            // or the IP on your own:
-//            ip: 'XXX.XXX.XXX.XXX'
-//        }
+//You have to set the header:
 //
-//    }, function (err) {
-//        // handle err here
-//        console.log(err);
-//        res.send(err[1]);
-//    });
+//    let request = require('request');
+//
+//let post_data = {
+//    'client_id': client_id,
+//    'client_secret': client_secret,
+//    'grant_type': 'authorization_code',
+//    'redirect_uri': redirect_uri,
+//    'code': ACCESS_CODE
+//};
+//
+//var headers = {
+//    'User-Agent': 'Super Agent/0.0.1',
+//    'Content-Type': 'application/x-www-form-urlencoded'
+//};
+//
+//var post_options = {
+//    url: 'https://api.instagram.com/oauth/access_token',
+//    method: 'POST',
+//    headers: headers,
+//    form: post_data
+//};
+//
+//
+//request(post_options, function (error, response, body) {
+//
+//    var parsedBody = JSON.parse(body);
+//    console.log('ACCESS_TOKEN: ' + parsedBody.access_token);
+//
 //});
+//
+////http: //stackoverflow.com/questions/24675408/instagram-api-oauthexception-you-must-provide-a-client-id

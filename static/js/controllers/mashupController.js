@@ -10,6 +10,8 @@ angular.module("shell")
 
         $scope.changeThis = function () {
 
+            console.log('inpuQuery: ' + $scope.inputQuery);
+
             mashupService.getTwitterExtended({
 
                 screen_name: $scope.inputQuery
@@ -24,6 +26,7 @@ angular.module("shell")
 
 
         };
+
 
         $scope.getInstagramNested = function () {
             mashupService.getInstagramExtended(function (response) {

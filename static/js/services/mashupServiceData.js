@@ -17,7 +17,6 @@ angular.module("shell")
                 }
             })
 
-
             .then(callback);
 
         };
@@ -33,6 +32,9 @@ angular.module("shell")
             })
 
             .then(callback);
+
+            console.log('params: ' + params)
+            console.log('sn: ' + params.screen_name)
 
         };
 

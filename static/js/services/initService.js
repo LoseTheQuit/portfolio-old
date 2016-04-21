@@ -38,8 +38,8 @@ angular.module("initModule")
         this.getWindowInfo = function () {
 
             var windowLocation = window.location.href;
-            var windowLocationWithToken = windowLocation.replace("http://127.0.0.1:5000/?code=", "");
-            // var windowLocationWithToken = windowLocation.replace("https://the-mixup.herokuapp.com/?code=", "");
+            var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/initShell.html?code=", "");
+
             return windowLocationWithToken;
 
         };
