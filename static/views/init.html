@@ -1,0 +1,133 @@
+<link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic' rel='stylesheet' type='text/css'>
+<style>
+    body {
+        width: 99%;
+        height: 99%;
+        background: #00a3e0;
+        color: #fff;
+        font-family: 'Gudea', sans-serif;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        word-wrap: break-word;
+    }
+    
+    .ghostButton {
+        border: 1px solid #fff;
+        width: 200px;
+        height: 50px;
+        cursor: pointer;
+        line-height: 50px;
+        display: block;
+        margin-bottom: 25px;
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    }
+    
+    .ghostButton:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .theWhiteLine {
+        width: 100%;
+        margin-bottom: 50px;
+        float: left;
+        background: #fff;
+        height: 3px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+    
+    .clearFloat {
+        clear: both;
+    }
+    
+    .igCard {
+        color: #00a3e0;
+        background: #fff;
+        padding: 25px;
+        height: 100%;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        margin-bottom: 25px;
+    }
+</style>
+
+<div class="bodyWrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div>
+                    <h1>werkspayce</h1>
+                </div>
+
+                <div class="theWhiteLine"></div>
+                <div class="clearFloat"></div>
+
+                <a class="ghostButton" href="{{instagramDataLink}}">
+                    <center>
+                        login
+                    </center>
+                </a>
+
+            </div>
+
+            <div class="col-md-12">
+                <h3>Data:</h3>
+                <div class="theWhiteLine"></div>
+                <div class="clearFloat"></div>
+            </div>
+
+            <div class="col-md-12">
+
+                <!--                <p>{{instagramData}}</p>-->
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 " ng-repeat="data in instagramData.data">
+                            <div class="igCard">
+                                <p>tags: {{data.tags}}</p>
+                                <p>type: {{data.type}}</p>
+                                <p>comments: {{data.comments}}</p>
+                                <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
+                                <!-- <img src="{{data.images.low_resolution.url}}"> -->
+                                <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
+                                <p>link: {{data.link}}</p>
+                                <p>id: {{data.id}}</p>
+                                <p>user: {{data.user}}</p>
+                                <p>username: {{data.user.username}}</p>
+                                <p>profile_picture: {{data.user.profile_picture}}</p>
+                                <p>id: {{data.user.id}}</p>
+                                <p>full_name: {{data.user.full_name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 " ng-repeat="data in instagramData.data">
+                            <div class="igCard">
+                                <p>tags: {{data}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="responseBox col-md-6">
+
+                <h3>Error:</h3>
+                <div class="theWhiteLine"></div>
+                <div class="clearFloat"></div>
+                <p>{{instagramData.code}}</p>
+                <p>{{instagramData.error_type}}</p>
+                <p>{{instagramData.error_message}}</p>
+
+            </div>
+-->
+
+
+        </div>
+    </div>
+</div>
