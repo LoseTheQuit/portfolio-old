@@ -3,13 +3,13 @@
 console.log("OUTSIDE initDirective");
 
 angular.module("mainModule")
-    .directive('init', function () {
+    .directive('instagram', function () {
 
         console.log("INSIDE initDirective");
 
         return {
 
-            templateUrl: '/templates/init.html',
+            templateUrl: '/templates/instagram.html',
             controller: 'initController',
             replace: false
         }

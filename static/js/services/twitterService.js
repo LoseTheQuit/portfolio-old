@@ -2,7 +2,8 @@
 
 console.log("outer mashupServiceData");
 
-angular.module("shell")
+//angular.module("shell")
+angular.module("mainModule")
     .service('mashupService', function ($http) {
         console.log("mashupServiceData initialized!");
 

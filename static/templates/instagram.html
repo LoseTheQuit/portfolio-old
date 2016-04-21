@@ -1,0 +1,146 @@
+<style>
+    .bodyWrapper {
+        width: 100%;
+        height: 100%;
+        background: #00a3e0;
+        color: #fff;
+        font-family: 'Gudea', sans-serif;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        word-wrap: break-word;
+    }
+    
+    .ghostButton {
+        width: 200px;
+        height: 50px;
+        cursor: pointer;
+        line-height: 50px;
+        display: block;
+        margin-bottom: 25px;
+        color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .25);
+    }
+    
+    .ghostButton:hover {
+        text-decoration: none;
+        color: #fff;
+        transition: all linear .50s;
+        background: rgba(250, 250, 250, .25);
+    }
+    
+    .theWhiteLine {
+        width: 100%;
+        margin-bottom: 50px;
+        float: left;
+        background: #fff;
+        height: 3px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+    /*  DELETE ME  */
+    
+    .clearFloat {
+        clear: both;
+    }
+    
+    .igCard {
+        color: #005693;
+        background: #fff;
+        padding: 25px;
+        height: 650px;
+        width: 100%;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        margin-bottom: 25px;
+    }
+    
+    .injectedImage {
+        width: 100%;
+    }
+    
+    .screenName {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .fullName {}
+    
+    .igCardPostLink {
+        display: block;
+    }
+</style>
+
+<div class="bodyWrapper">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h3>Instagram:</h3>
+            <div class="theWhiteLine"></div>
+            <div class="clearFloat"></div>
+        </div>
+
+        <div class="col-md-12">
+
+            <!-- <p>{{instagramData}}</p> -->
+
+            <div class="row">
+                <div class="col-md-6" ng-repeat="data in instagramData.data">
+                    <div class="igCard">
+                        <div class="col-md-3">
+                            <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+                        </div>
+                        <div class="col-md-9">
+                            <p class="screenName">{{data.user.username}}</p>
+                        </div>
+
+
+
+                        <p class="fullName">{{data.user.full_name}}</p>
+
+                        <!-- <p>comments: {{data.comments}}</p> -->
+
+                        <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
+                        <p>tags:</p>
+                        <span ng-repeat="data in data.tags">
+                            <span>{{data}}</span>
+                        </span>
+                        <!--
+                                <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
+                                <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
+                        -->
+                        <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
+                        <!-- <p>user: {{data.user}}</p>-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //    $(function () {
+    //        setTimeout(function () {
+    //            let igCardHeight = 0;
+    //
+    //            console.info('igCardHeight: ' + igCardHeight);
+    //
+    //            $('.igCard').each(function () {
+    //
+    //                if (igCardHeight <= $(this).height()) {
+    //
+    //                    igCardHeight = $(this).height();
+    //
+    //                    console.info('igCardHeight: ' + igCardHeight);
+    //
+    //                    $(this).height(igCardHeight).css({
+    //                        height: igCardHeight
+    //                    });
+    //                }
+    //            });
+    //        }, 3000);
+    //    });
+</script>

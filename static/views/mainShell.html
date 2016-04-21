@@ -2,7 +2,9 @@
 <html class="no-js" lang="en">
 
 <head>
-    <title>from-a-stand-point</title>
+
+    <title>werkspayce</title>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0088cb">
@@ -12,14 +14,77 @@
 
     <link rel="icon" type="image/png" href="//pbiwebprod.blob.core.windows.net/webassets/images/favicon.png">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic' rel='stylesheet' type='text/css'>
 
+
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            background: #00a3e0;
+            color: #fff;
+            font-family: 'Gudea', sans-serif;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+            word-wrap: break-word;
+        }
+        
+        .container {
+            width: 90%;
+        }
+        
+        .headLine {
+            font-size: 40px;
+        }
+    </style>
 </head>
 
 <body ng-app="mainModule">
 
-    <init></init>
+    <div class="container">
+        <div class="row">
+            <div class="headerheightAdjustments">
+                <div class="col-lg-6">
+                    <div>
+                        <h1 class="headLine">werkspayce</h1>
+                    </div>
+                </div>
 
-    <mashup></mashup>
+                <div class="col-lg-6">
+                    <input class="inputBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="theWhiteLine"></div>
+                        <div class="clearFloat"></div>
+                    </div>
+                </div>
+
+                <a class="ghostButton" href="{{instagramDataLink}}">
+                    <center>
+                        login
+                    </center>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <instagram></instagram>
+            </div>
+            <div class="col-lg-6">
+                <mashup></mashup>
+            </div>
+        </div>
+    </div>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -29,8 +94,11 @@
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/controllers/instagramController.js"></script>
+    <script src="../js/controllers/twitterController.js"></script>
     <script src="../js/directives/instagramDirective.js"></script>
+    <script src="../js/directives/twitterDirective.js"></script>
     <script src="../js/services/instagramService.js"></script>
+    <script src="../js/services/twitterService.js"></script>
     <!-- ANGULAR IMPORTS -->
 
 </body>

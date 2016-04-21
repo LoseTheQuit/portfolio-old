@@ -11,8 +11,6 @@ angular.module("mainModule")
 
         $scope.windowInfoWithToken = dataService.getWindowInfo();
         console.warn($scope.windowInfoWithToken);
-        console.warn($scope.windowInfoWithToken);
-        console.warn($scope.windowInfoWithToken);
 
         //        $scope.tapIgApiCUSTOM = function () {
         //

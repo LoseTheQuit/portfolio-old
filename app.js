@@ -179,7 +179,7 @@ app.post('/ig', function (req, res, next) {
             // THESE WORK
 
             var self_search = {
-                url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + parsedBody.access_token + '&count=3',
+                url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + parsedBody.access_token + '&count=300',
                 method: 'GET'
             };
 
