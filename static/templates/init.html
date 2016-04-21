@@ -80,7 +80,7 @@
 
             <div class="col-md-12">
 
-                <!--                <p>{{instagramData}}</p>-->
+                <!-- <p>{{instagramData}}</p> -->
 
                 <div class="container">
                     <div class="row">
@@ -89,15 +89,20 @@
                                 <p>tags: {{data.tags}}</p>
                                 <p>type: {{data.type}}</p>
                                 <p>comments: {{data.comments}}</p>
-                                <!-- <p>low_resolution.url: {{data.images.low_resolution.url}}</p> -->
+
                                 <img src="{{data.images.low_resolution.url}}">
+
+                                <!--
                                 <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
+                                <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
+                                -->
+
                                 <p>link: {{data.link}}</p>
                                 <p>id: {{data.id}}</p>
                                 <p>user: {{data.user}}</p>
                                 <p>username: {{data.user.username}}</p>
                                 <p>profile_picture: {{data.user.profile_picture}}</p>
-                                <!--  <p>id: {{data.user.id}}</p> -->
+                                <!--  <p>id: {{data.user.id}} </p> -->
                                 <p>full_name: {{data.user.full_name}}</p>
                             </div>
                         </div>

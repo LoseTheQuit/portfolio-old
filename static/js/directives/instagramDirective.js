@@ -2,7 +2,7 @@
 
 console.log("OUTSIDE initDirective");
 
-angular.module("initModule")
+angular.module("mainModule")
     .directive('init', function () {
 
         console.log("INSIDE initDirective");

@@ -4,7 +4,7 @@ console.log("outer shellController");
 
 angular.module("shell")
     .controller('portfolioController', function ($scope, dataService) {
-        console.info("portfolioController initialized!")
 
+        console.log("portfolioController initialized!");
 
     });

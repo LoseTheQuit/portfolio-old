@@ -2,7 +2,7 @@
 
 console.log("OUTSIDE dataService");
 
-angular.module("initModule")
+angular.module("mainModule")
     .service('dataService', function ($http) {
 
         console.log("INSIDE dataService");
@@ -38,7 +38,7 @@ angular.module("initModule")
         this.getWindowInfo = function () {
 
             var windowLocation = window.location.href;
-            var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/initShell.html?code=", "");
+            var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/mainShell.html?code=", "");
 
             return windowLocationWithToken;
 
