@@ -44,15 +44,14 @@
     }
     
     .igCard {
+        /* width: 50%; */
         color: #005693;
         background: #fff;
         padding: 25px;
-        width: 100%;
-        height: 650px;
+        height: 100%;
         text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
         box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
         margin-bottom: 25px;
-        /*        */
         background: rgba(0, 0, 0, .5);
         border: 1px solid #fff;
         color: #fff;
@@ -109,62 +108,51 @@
     }
 </style>
 
+
+
 <div class="bodyWrapper">
 
     <div class="row">
-
         <div class="col-md-12">
             <h3>Instagram:</h3>
             <div class="theWhiteLine"></div>
             <div class="clearFloat"></div>
         </div>
+        <div ng-repeat="data in instagramData.data">
+            <div class="col-md-6 igCard">
+                <div class="igCardHeaderMargin">
+                    <div class="col-md-3">
+                        <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+                    </div>
+                    <div class="col-md-9">
+                        <p class="screenName">{{data.user.username}}</p>
+                        <p class="fullName">{{data.user.full_name}}</p>
+                    </div>
+                </div>
+                <div class="col-md-12 photoMargin">
+                    <center>
+                        <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
+                    </center>
+                </div>
 
-        <div class="col-md-12">
+                <div class="col-md-12">
+                    <p class="boldTheTags">tags:</p>
 
-            <!-- <p>{{instagramData}}</p> -->
-
-            <div class="row">
-                <div class="col-md-6" ng-repeat="data in instagramData.data">
-
-                    <div class="igCard">
-
-                        <div class="igCardHeaderMargin">
-                            <div class="col-md-3">
-                                <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
-                            </div>
-                            <div class="col-md-9">
-                                <p class="screenName">{{data.user.username}}</p>
-                                <p class="fullName">{{data.user.full_name}}</p>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-md-12 photoMargin">
-                            <center>
-                                <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
-                            </center>
-                        </div>
-
-                        <div class="col-md-12">
-                            <p class="boldTheTags">tags:</p>
-
-                            <span ng-repeat="data in data.tags">
+                    <span ng-repeat="data in data.tags">
                                 <a ng-href="#"  class="igCardTagLink">{{data}}</a>
                             </span>
-                            <!--
+                    <!--
                                 <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
                                 <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
                         -->
-                            <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
-                            <!-- <p>user: {{data.user}}</p>-->
-
-                        </div>
-                    </div>
+                    <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
+                    <!-- <p>user: {{data.user}}</p>-->
 
                 </div>
-
             </div>
+
+
+
         </div>
     </div>
 </div>
