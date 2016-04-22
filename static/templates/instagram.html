@@ -9,6 +9,15 @@
         word-wrap: break-word;
     }
     
+    .theWhiteLine {
+        width: 100%;
+        margin-bottom: 50px;
+        float: left;
+        background: #fff;
+        height: 3px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    }
+    
     .ghostButton {
         width: 200px;
         height: 50px;
@@ -30,16 +39,6 @@
         background: rgba(250, 250, 250, .25);
     }
     
-    .theWhiteLine {
-        width: 100%;
-        margin-bottom: 50px;
-        float: left;
-        background: #fff;
-        height: 3px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-    }
-    /*  DELETE ME  */
-    
     .clearFloat {
         clear: both;
     }
@@ -48,15 +47,32 @@
         color: #005693;
         background: #fff;
         padding: 25px;
-        height: 650px;
         width: 100%;
+        height: 650px;
         text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
         margin-bottom: 25px;
+        /*        */
+        background: rgba(0, 0, 0, .5);
+        border: 1px solid #fff;
+        color: #fff;
+    }
+    
+    .igCard:hover {
+        transition: all linear .50s;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
     }
     
     .injectedImage {
         width: 100%;
+        border: 1px solid #005693;
+        box-shadow: 0 10px 5px rgba(0, 0, 0, .25);
+    }
+    
+    .injectedImage:hover {
+        width: 99.9%;
+        transition: all linear .25s;
+        box-shadow: 0 5px 1px rgba(0, 0, 0, .25);
     }
     
     .screenName {
@@ -64,10 +80,32 @@
         font-weight: 600;
     }
     
-    .fullName {}
+    .fullName {
+        font-style: italic;
+    }
+    
+    .igCardHeaderMargin {
+        margin-bottom: 50px;
+        padding-bottom: 50px;
+    }
+    
+    .photoMargin {
+        margin-bottom: 50px;
+    }
     
     .igCardPostLink {
+        color: #fff;
+        margin-top: 10px;
         display: block;
+    }
+    
+    .boldTheTags {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .igCardTagLink {
+        color: #fff;
     }
 </style>
 
@@ -83,36 +121,45 @@
 
         <div class="col-md-12">
 
-            <!-- <p>{{instagramData}}</p> -->
+            <!--            <p>{{instagramData}}</p>-->
 
             <div class="row">
                 <div class="col-md-6" ng-repeat="data in instagramData.data">
+
                     <div class="igCard">
-                        <div class="col-md-3">
-                            <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+
+                        <div class="igCardHeaderMargin">
+                            <div class="col-md-3">
+                                <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+                            </div>
+                            <div class="col-md-9">
+                                <p class="screenName">{{data.user.username}}</p>
+                                <p class="fullName">{{data.user.full_name}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <p class="screenName">{{data.user.username}}</p>
+
+
+
+                        <div class="col-md-12 photoMargin">
+                            <center>
+                                <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
+                            </center>
                         </div>
 
+                        <div class="col-md-12">
+                            <p class="boldTheTags">tags:</p>
 
-
-                        <p class="fullName">{{data.user.full_name}}</p>
-
-                        <!-- <p>comments: {{data.comments}}</p> -->
-
-                        <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
-                        <p>tags:</p>
-                        <span ng-repeat="data in data.tags">
-                            <span>{{data}}</span>
-                        </span>
-                        <!--
+                            <span ng-repeat="data in data.tags">
+                                <a ng-href="#"  class="igCardTagLink">{{data}}</a>
+                            </span>
+                            <!--
                                 <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
                                 <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
                         -->
-                        <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
-                        <!-- <p>user: {{data.user}}</p>-->
+                            <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
+                            <!-- <p>user: {{data.user}}</p>-->
 
+                        </div>
                     </div>
 
                 </div>

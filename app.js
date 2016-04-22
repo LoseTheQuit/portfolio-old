@@ -188,16 +188,16 @@ app.post('/ig', function (req, res, next) {
                 method: 'GET'
             };
 
-            var popular_tag_search_tag_name = {
-                url: 'https://api.instagram.com/v1/tags/kim?access_token=' + parsedBody.access_token,
+            var search_popular_by_tag_name = {
+                url: 'https://api.instagram.com/v1/tags/nodejs?access_token=' + parsedBody.access_token,
                 method: 'GET'
             };
             var popular_tag_search_tag_name_recent = {
-                url: 'https://api.instagram.com/v1/tags/food/media/recent?access_token=' + parsedBody.access_token + '&count=200',
+                url: 'https://api.instagram.com/v1/tags/nodejs/media/recent?access_token=' + parsedBody.access_token + '&count=200',
                 method: 'GET'
             };
 
-            //
+            // 
 
             //&min_id=678453535718114828_919796408
             request(self_search, function (error, response, body) {
