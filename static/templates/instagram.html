@@ -112,11 +112,17 @@
 <div class="bodyWrapper">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-6">
             <h3>Instagram:</h3>
-            <div class="theWhiteLine"></div>
-            <div class="clearFloat"></div>
         </div>
+        <div class="col-lg-6">
+            <input class="inputBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
+        </div>
+
+    </div>
+    <div class="theWhiteLine"></div>
+    <div class="clearFloat"></div>
+    <div class="row">
         <div ng-repeat="data in instagramData.data">
             <div class="col-md-6 igCard">
                 <div class="igCardHeaderMargin">
@@ -155,6 +161,7 @@
         </div>
     </div>
 </div>
+
 <script>
     //    $(function () {
     //        setTimeout(function () {
