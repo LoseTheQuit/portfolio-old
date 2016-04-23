@@ -19,6 +19,19 @@ angular.module("mainModule")
 
             .then(callback);
         }
+        this.tapInstaExtended = function (access_token, instaQuery, callback) {
+
+            $http({
+                method: 'POST',
+                url: '/instaInputQuery',
+                data: {
+                    token: access_token,
+                    query: instaQuery
+                }
+            })
+
+            .then(callback);
+        }
 
         this.getHandleAuth = function (callback) {
 

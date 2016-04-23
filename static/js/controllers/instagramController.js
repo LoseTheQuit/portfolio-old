@@ -12,17 +12,17 @@ angular.module("mainModule")
         $scope.windowInfoWithToken = dataService.getWindowInfo();
         console.warn($scope.windowInfoWithToken);
 
-        //        $scope.tapIgApiCUSTOM = function () {
-        //
-        //            dataService.tapInsta($scope.windowInfoWithToken, function (response) {
-        //
-        //                console.warn(response.data);
-        //
-        //                // $scope.instagramData = response.data.link;
-        //
-        //            });
-        //
-        //        };
+        $scope.tapIgApiCUSTOM = function () {
+
+            dataService.tapInstaExtended($scope.windowInfoWithToken, $scope.instaQuery, function (response) {
+
+                console.warn(response.data);
+
+                // $scope.instagramData = response.data.link;
+
+            });
+
+        };
 
         dataService.tapInsta($scope.windowInfoWithToken, function (response) {
 

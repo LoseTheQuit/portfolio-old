@@ -7,7 +7,9 @@ let fs = require('fs'),
     bodyParser = require('body-parser'),
     https = require('https'),
     http = require('http'),
-    Twitter = require('twitter');
+    Twitter = require('twitter'),
+    request = require('request');
+
 
 
 let client_id = "b23670e220f14f1c89c11f627c9f9953";
@@ -98,15 +100,20 @@ app.listen(app.get('port'), function () {
 
 });
 
+var tokenContainer = [];
+
 app.post('/ig', function (req, res, next) {
 
     console.log('\n');
     console.log('*******************************************************'.black.bgGreen);
     console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('INPUT_QUERY: ' + req.body.token);
 
     let ACCESS_CODE = req.body.token;
-
-    let request = require('request');
 
     let post_data = {
         'client_id': client_id,
@@ -141,36 +148,41 @@ app.post('/ig', function (req, res, next) {
         } else {
 
             console.log('ACCESS_TOKEN: ' + parsedBody.access_token);
+            tokenContainer.push(parsedBody.access_token);
 
+            console.log('tokenContainer.push(parsedBody.access_token)');
 
-            // THESE DON'T WORK
+            checkCodeContainer()
+
+            // res.send(customRequest());
             var from_the_docs = {
-                url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + tokenContainer[0],
                 method: 'GET'
+
             };
             var media_search = {
-                url: 'https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=' + tokenContainer[0],
                 method: 'GET'
             };
 
             var popular_media_search = {
-                url: 'https://api.instagram.com/v1/media/popular?access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/media/popular?access_token=' + tokenContainer[0],
                 method: 'GET'
             };
 
             var from_SO_search = {
                 url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
-                    redirect_uri + '&access_token=' + parsedBody.access_token,
+                    redirect_uri + '&access_token=' + tokenContainer[0],
                 method: 'GET'
             }
             var from_SO_search = {
                 url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
-                    redirect_uri + '&access_token=' + parsedBody.access_token,
+                    redirect_uri + '&access_token=' + tokenContainer[0],
                 method: 'GET'
             }
 
             var user_search_by_name = {
-                url: 'https://api.instagram.com/v1/users/search?q=cthagod&access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/users/search?q=cthagod&access_token=' + tokenContainer[0],
                 method: 'GET'
             }
 
@@ -179,78 +191,158 @@ app.post('/ig', function (req, res, next) {
             // THESE WORK
 
             var self_search = {
-                url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + parsedBody.access_token + '&count=300',
+                url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + tokenContainer[0] + '&count=300',
                 method: 'GET'
             };
 
             var popular_tag_search = {
-                url: 'https://api.instagram.com/v1/tags/search?q=red&access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/tags/search?q=red&access_token=' + tokenContainer[0],
                 method: 'GET'
             };
 
             var search_popular_by_tag_name = {
-                url: 'https://api.instagram.com/v1/tags/nodejs?access_token=' + parsedBody.access_token,
+                url: 'https://api.instagram.com/v1/tags/nodejs?access_token=' + tokenContainer[0],
                 method: 'GET'
             };
             var popular_tag_search_tag_name_recent = {
-                url: 'https://api.instagram.com/v1/tags/nodejs/media/recent?access_token=' + parsedBody.access_token + '&count=200',
+                url: 'https://api.instagram.com/v1/tags/dev/media/recent?access_token=' + tokenContainer[0] + '&count=200',
                 method: 'GET'
             };
 
-            // 
-
             //&min_id=678453535718114828_919796408
+
             request(self_search, function (error, response, body) {
                 if (error && response.statusCode != 200) {
                     console.error(error);
-                    res.send(error);
+                    return error
                 } else {
                     var jsonobjArr = JSON.parse(body);
                     console.log('*******************************************************'.black.bgGreen);
-                    console.log(jsonobjArr);
+
+                    // turns off back end logging of user info.data
+
+                    // console.log(jsonobjArr);
                     console.log('*******************************************************'.black.bgGreen);
+                    //return jsonobjArr
                     res.send(jsonobjArr);
                 }
             });
-
         }
     });
 
 });
 
+function checkCodeContainer() {
+
+    if (tokenContainer.length > 1) {
+        console.log('true')
+        console.log('tokenContainer.length IS > 1')
+
+
+    } else {
+        console.log('false')
+        console.log('tokenContainer.length IS NOTE > 1')
+
+    }
+}
+
+app.post('/instaInputQuery', function (req, res, next) {
+
+
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('instaInputQuery + instaInputQuery')
+    console.log('\n');
+    console.log('*******************************************************'.black.bgGreen);
+    console.log('ACCESS_CODE: ' + req.body.token);
+    console.log('INPUT_QUERY: ' + req.body.query);
+    console.log('INPUT_QUERY: ' + req.body.query);
+
+
+    var redBook = '48 Laws';
+    let inputQueryFromHTML = req.body.query;
+
+    console.log('ACCESS_TOKEN: ' + tokenContainer[0]);
+
+    checkCodeContainer()
+
+    // res.send(customRequest());
+    var from_the_docs = {
+        url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + tokenContainer[0],
+        method: 'GET'
+
+    };
+    var media_search = {
+        url: 'https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=' + tokenContainer[0],
+        method: 'GET'
+    };
+
+    var popular_media_search = {
+        url: 'https://api.instagram.com/v1/media/popular?access_token=' + tokenContainer[0],
+        method: 'GET'
+    };
+
+    var from_SO_search = {
+        url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
+            redirect_uri + '&access_token=' + tokenContainer[0],
+        method: 'GET'
+    }
+    var from_SO_search = {
+        url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
+            redirect_uri + '&access_token=' + tokenContainer[0],
+        method: 'GET'
+    }
+
+    var user_search_by_name = {
+        url: 'https://api.instagram.com/v1/users/search?q=cthagod&access_token=' + tokenContainer[0],
+        method: 'GET'
+    }
+
+    //
+
+    // THESE WORK
+
+    var self_search = {
+        url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + tokenContainer[0] + '&count=300',
+        method: 'GET'
+    };
+
+    var popular_tag_search = {
+        url: 'https://api.instagram.com/v1/tags/search?q=red&access_token=' + tokenContainer[0],
+        method: 'GET'
+    };
+
+    var search_popular_by_tag_name = {
+        url: 'https://api.instagram.com/v1/tags/nodejs?access_token=' + tokenContainer[0],
+        method: 'GET'
+    };
+    var popular_tag_search_tag_name_recent = {
+        url: 'https://api.instagram.com/v1/tags/dev/media/recent?access_token=' + tokenContainer[0] + '&count=200',
+        method: 'GET'
+    };
+
+    //&min_id=678453535718114828_919796408
+
+    request(popular_tag_search_tag_name_recent, function (error, response, body) {
+        if (error && response.statusCode != 200) {
+            console.error(error);
+            return error
+        } else {
+            var jsonobjArr = JSON.parse(body);
+            console.log('*******************************************************'.black.bgGreen);
+
+            // turns off back end logging of user info.data
+
+            console.log(jsonobjArr);
+            console.log('*******************************************************'.black.bgGreen);
+            //return jsonobjArr
+            res.send(jsonobjArr);
+        }
+    });
+
+});
 
 ////https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=10
-//
-//You have to set the header:
-//
-//    let request = require('request');
-//
-//let post_data = {
-//    'client_id': client_id,
-//    'client_secret': client_secret,
-//    'grant_type': 'authorization_code',
-//    'redirect_uri': redirect_uri,
-//    'code': ACCESS_CODE
-//};
-//
-//var headers = {
-//    'User-Agent': 'Super Agent/0.0.1',
-//    'Content-Type': 'application/x-www-form-urlencoded'
-//};
-//
-//var post_options = {
-//    url: 'https://api.instagram.com/oauth/access_token',
-//    method: 'POST',
-//    headers: headers,
-//    form: post_data
-//};
-//
-//
-//request(post_options, function (error, response, body) {
-//
-//    var parsedBody = JSON.parse(body);
-//    console.log('ACCESS_TOKEN: ' + parsedBody.access_token);
-//
-//});
-//
-////http: //stackoverflow.com/questions/24675408/instagram-api-oauthexception-you-must-provide-a-client-id

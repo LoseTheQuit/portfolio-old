@@ -32,8 +32,14 @@
             width: 90%;
         }
         
+        .headerheightAdjustments {
+            margin-top: 50px;
+            margin-bottom: 500px;
+        }
+        
         .headLine {
             font-size: 40px;
+            color: #fff;
         }
         
         .jumboTronImageOverlay {
@@ -46,25 +52,13 @@
             width: 100%;
         }
         
-        .jumbotronContent {
-            margin-top: 200px;
-        }
-        
-        .jumbotron {
-            padding: 0px;
-            height: 100vh;
-            background: url('http://go.medassets.com/rs/099-EMG-811/images/babyJoe-Hero.jpg') no-repeat;
-            background-size: cover;
-        }
-        
-        .jumbotron {
+        .customJumbotron {
             height: 100vh;
             color: #005693;
-            background: none, url('http://1.bp.blogspot.com/-hyvhlBuSdAs/UbD4UIo56FI/AAAAAAAAEE4/CK5-vMC9oiE/s1600/Seamless+white+crease+paper+texture.jpg') no-repeat center center;
-            /*            */
+            background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') no-repeat center center;
             /*            */
             background-size: cover;
-            display: none;
+            /*            display: none;*/
         }
         
         .imageOverlay {
@@ -72,15 +66,6 @@
             height: 100%;
             background: rgba(0, 0, 0, .25);
             color: #fff;
-        }
-        
-        .jumbotron h1 {
-            font-size: 75px;
-        }
-        
-        .jumbotron p {
-            font-size: 24px;
-            margin-bottom: 100px;
         }
         
         .floatRight {
@@ -91,41 +76,11 @@
 
 <!--<img src="../img/mjj.svg">-->
 
-<!--<object class="genetics" type="image/svg+xml" data="../img/mjj.svg"></object>-->
 
 <body ng-app="mainModule">
 
-
-    <div class="jumbotron">
-        <div class="imageOverlay">
-            <div class="container">
-
-                <div class="jumbotronContent">
-                    <div class="col-lg-6">
-
-                        <h1 class="jumbotronHeadline">Social Search Engine</h1>
-                        <p class="jumbotronContact">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                        <a class="ghostButton" href="#socialContainer" role="button">
-                            <center>
-                                Learn more &raquo;
-                            </center>
-                        </a>
-                        <div class="clearFloat"></div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!--                        <object class="genetics" type="image/svg+xml" data="../img/mjj.svg"></object>-->
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-
+    <div class="row customJumbotron">
+        <div class="container">
             <div class="headerheightAdjustments">
                 <div class="col-lg-6">
                     <div>
@@ -145,6 +100,7 @@
         </div>
     </div>
 
+    <!--
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -157,6 +113,7 @@
             </div>
         </div>
     </div>
+-->
 
     <div class="container" id="socialContainer">
         <div class="row">
