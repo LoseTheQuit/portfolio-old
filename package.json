@@ -17,6 +17,7 @@
     "instagram-node": "^0.5.8",
     "mongoose": "^4.4.12",
     "node-rest-client": "^1.8.0",
+    "request": "^2.72.0",
     "twitter": "^1.2.5"
   },
   "engines": {
