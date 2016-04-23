@@ -32,6 +32,10 @@
         background: rgba(0, 0, 0, .25);
     }
     
+    .floatRight {
+        float: right;
+    }
+    
     .ghostButton:hover {
         text-decoration: none;
         color: #fff;
@@ -122,6 +126,7 @@
     </div>
     <div class="theWhiteLine"></div>
     <div class="clearFloat"></div>
+
     <div class="row">
         <div ng-repeat="data in instagramData.data">
             <div class="col-md-6 igCard">
@@ -143,15 +148,11 @@
                 <div class="col-md-12">
                     <p class="boldTheTags">tags:</p>
 
-                    <span ng-repeat="data in data.tags">
-                                <a ng-href="#"  class="igCardTagLink">{{data}}</a>
-                            </span>
-                    <!--
-                                <p>standard_resolution.url: {{data.images.standard_resolution.url}}</p>
-                                <p>low_resolution.url: {{data.images.low_resolution.url}}</p>
-                        -->
+                    <div ng-repeat="data in data.tags">
+                        <a ng-href="#" class="igCardTagLink">{{data}}</a>
+                    </div>
+
                     <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
-                    <!-- <p>user: {{data.user}}</p>-->
 
                 </div>
             </div>

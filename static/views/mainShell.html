@@ -64,6 +64,7 @@
             /*            */
             /*            */
             background-size: cover;
+            display: none;
         }
         
         .imageOverlay {
@@ -81,14 +82,13 @@
             font-size: 24px;
             margin-bottom: 100px;
         }
+        
+        .floatRight {
+            float: right;
+        }
     </style>
 </head>
 
-<!--<img src="../img/mjj.svg">-->
-<!--<img src="../img/mjj.svg">-->
-<!--<img src="../img/mjj.svg">-->
-<!--<img src="../img/mjj.svg">-->
-<!--<img src="../img/mjj.svg">-->
 <!--<img src="../img/mjj.svg">-->
 
 <!--<object class="genetics" type="image/svg+xml" data="../img/mjj.svg"></object>-->
@@ -110,6 +110,7 @@
                                 Learn more &raquo;
                             </center>
                         </a>
+                        <div class="clearFloat"></div>
                     </div>
 
                     <div class="col-lg-6">
@@ -131,10 +132,14 @@
                         <h1 class="headLine">werkspayce</h1>
                     </div>
                 </div>
-
                 <div class="col-lg-6">
-                    <input class="inputBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
+                    <a class="ghostButton floatRight" href="{{instagramDataLink}}">
+                        <center>
+                            login
+                        </center>
+                    </a>
                 </div>
+
             </div>
 
         </div>
@@ -149,12 +154,6 @@
                         <div class="clearFloat"></div>
                     </div>
                 </div>
-
-                <a class="ghostButton" href="{{instagramDataLink}}">
-                    <center>
-                        login
-                    </center>
-                </a>
             </div>
         </div>
     </div>
