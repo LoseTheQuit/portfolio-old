@@ -25,18 +25,6 @@ angular.module("mainModule")
 
             });
 
-
-        };
-
-
-        $scope.getInstagramNested = function () {
-            mashupService.getInstagramExtended(function (response) {
-
-                var tweets = response.data;
-                console.log(tweets);
-                // $scope.twitterdata = tweets;
-
-            });
         };
 
         mashupService.getTwitter(function (response) {

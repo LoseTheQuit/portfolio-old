@@ -14,9 +14,8 @@ let fs = require('fs'),
 
 let client_id = "b23670e220f14f1c89c11f627c9f9953";
 let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let redirect_uri = 'http://localhost:5000/views/mainShell.html';
+let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
 var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
-
 
 app.use(bodyParser.json());
 
@@ -260,7 +259,8 @@ app.post('/instaInputQuery', function (req, res, next) {
     console.log('ACCESS_CODE: ' + req.body.token);
     console.log('INPUT_QUERY: ' + req.body.query);
     console.log('INPUT_QUERY: ' + req.body.query);
-
+    console.log('INPUT_QUERY: ' + typeof req.body.query);
+    console.log('INPUT_QUERY: ' + typeof req.body.query); // returns string
 
     var redBook = '48 Laws';
     let inputQueryFromHTML = req.body.query;
@@ -301,8 +301,6 @@ app.post('/instaInputQuery', function (req, res, next) {
         method: 'GET'
     }
 
-    //
-
     // THESE WORK
 
     var self_search = {
@@ -316,30 +314,26 @@ app.post('/instaInputQuery', function (req, res, next) {
     };
 
     var search_popular_by_tag_name = {
-        url: 'https://api.instagram.com/v1/tags/nodejs?access_token=' + tokenContainer[0],
-        method: 'GET'
-    };
-    var popular_tag_search_tag_name_recent = {
-        url: 'https://api.instagram.com/v1/tags/dev/media/recent?access_token=' + tokenContainer[0] + '&count=200',
+        url: 'https://api.instagram.com/v1/tags/' + req.body.query + '?access_token=' + tokenContainer[0],
         method: 'GET'
     };
 
-    //&min_id=678453535718114828_919796408
+    var popular_tag_search_tag_name_recent = {
+        url: 'https://api.instagram.com/v1/tags/' + req.body.query + '/media/recent?access_token=' + tokenContainer[0] + '&count=200',
+        method: 'GET'
+    };
 
     request(popular_tag_search_tag_name_recent, function (error, response, body) {
-        if (error && response.statusCode != 200) {
+        if (error || response.statusCode != 200) {
+            error = error || response;
             console.error(error);
-            return error
+            res.send(error);
         } else {
-            var jsonobjArr = JSON.parse(body);
+            var JSONobjArray = JSON.parse(body);
             console.log('*******************************************************'.black.bgGreen);
-
-            // turns off back end logging of user info.data
-
-            console.log(jsonobjArr);
+            console.log(JSONobjArray);
             console.log('*******************************************************'.black.bgGreen);
-            //return jsonobjArr
-            res.send(jsonobjArr);
+            res.send(JSONobjArray);
         }
     });
 
