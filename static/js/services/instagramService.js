@@ -51,7 +51,7 @@ angular.module("mainModule")
         this.getWindowInfo = function () {
 
             var windowLocation = window.location.href;
-            var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/mainShell.html?code=", "");
+            var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/mainShell.html?code=", "");
 
             return windowLocationWithToken;
 
