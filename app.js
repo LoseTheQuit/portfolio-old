@@ -11,10 +11,15 @@ let fs = require('fs'),
     request = require('request');
 
 
-let client_id = "b23670e220f14f1c89c11f627c9f9953";
-let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
-var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
+let client_id_production = "b23670e220f14f1c89c11f627c9f9953";
+let client_secret_production = "dd78c7ffbadd4a10a49f24675356c4d2";
+let redirect_uri_production = 'https://losethequit.herokuapp.com/views/mainShell.html';
+
+//
+//
+//
+
+var authorize_link_production = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id_production + '&redirect_uri=' + redirect_uri_production + '&response_type=code';
 
 app.use(bodyParser.json());
 
@@ -114,10 +119,10 @@ app.post('/ig', function (req, res, next) {
     let ACCESS_CODE = req.body.token;
 
     let post_data = {
-        'client_id': client_id,
-        'client_secret': client_secret,
+        'client_id': client_id_production,
+        'client_secret': client_secret_production,
         'grant_type': 'authorization_code',
-        'redirect_uri': redirect_uri,
+        'redirect_uri': redirect_uri_production,
         'code': ACCESS_CODE
     };
 
