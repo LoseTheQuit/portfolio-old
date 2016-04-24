@@ -174,13 +174,13 @@ app.post('/ig', function (req, res, next) {
             };
 
             var from_SO_search = {
-                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
+                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id_production + '&callback=' +
                     redirect_uri + '&access_token=' + tokenContainer[0],
                 method: 'GET'
             }
             var from_SO_search = {
-                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id + '&callback=' +
-                    redirect_uri + '&access_token=' + tokenContainer[0],
+                url: 'https://api.instagram.com/v1/tags/res/media/recent?client_id=' + client_id_production + '&callback=' +
+                    redirect_uri_production + '&access_token=' + tokenContainer[0],
                 method: 'GET'
             }
 
