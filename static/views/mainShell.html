@@ -98,11 +98,46 @@
         .customCardBackground {
             background: rgba(0, 0, 0, .5);
         }
+        
+        .animate-enter,
+        .animate-leave {
+            -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+            position: relative;
+            display: block;
+        }
+        
+        .animate-enter.animate-enter-active,
+        .animate-leave {
+            opacity: 1;
+            top: 0;
+            height: 30px;
+        }
+        
+        .animate-leave.animate-leave-active,
+        .animate-enter {
+            opacity: 0;
+            top: -50px;
+            height: 0px;
+        }
     </style>
 </head>
 
-<!--<img src="../img/mjj.svg">-->
-
+<!--
+<div ng-app="ngAnimate">
+    <div ng-init="checked=true">
+        <label>
+            <input type="checkbox" ng-model="checked" style="float:left; margin-right:10px;"> Is Visible...
+        </label>
+        <div class="check-element sample-show-hide" ng-show="checked" style="clear:both;">
+            Visible...
+        </div>
+    </div>
+</div>
+-->
 
 <body ng-app="mainModule">
 
@@ -158,7 +193,13 @@
     <script src="../js/universal/parallax.js"></script>
 
     <!-- ANGULAR IMPORTS -->
+    <!--
     <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+
     <script src="../js/main.js"></script>
     <script src="../js/controllers/instagramController.js"></script>
     <script src="../js/controllers/twitterController.js"></script>
@@ -169,14 +210,35 @@
     <!-- ANGULAR IMPORTS -->
 
     <script>
-        $(document).ready(function () {
-            // Handler for .ready() called.
-            $(".btn").click(function () {
-                $(this).animate({
-                    scrollTop: $('#socialContainer').offset().top
-                }, 'slow');
+        $(function () {
+            $(".igCard").animate({
+                opacity: '1'
+            }, 10000);
+            //            $("div.igCard").slideUp(300).delay(800).fadeIn(400);
+            //            $("div.igCard").slideUp(300).fadeIn(400);
+            //            (".igCard").animate({
+            //                opacity: 1
+            //            }, 700);
+            $(".igCard").fadeIn("slow", function () {
+                console.log('igCard INSIDE')
+                    // Animation complete
+            });
+            $(".injectedImage").fadeIn(1000, function () {
+                console.log('INJECT INSIDE')
+                    // Animation complete
             });
         });
+        //        $(document).ready(function () {
+        //            $("#book").fadeIn("slow", function () {
+        //                // Animation complete
+        //            });
+        //            // Handler for .ready() called.
+        //            $(".btn").click(function () {
+        //                $(this).animate({
+        //                    scrollTop: $('#socialContainer').offset().top
+        //                }, 'slow');
+        //            });
+        //        });
     </script>
 
 </body>

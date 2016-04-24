@@ -72,7 +72,8 @@
     
     .injectedImage:hover {
         /* width: 99.9%; */
-        transition: all linear .25s;
+        /* width: 99.9%; */
+        transition: all linear .75;
         box-shadow: 0 5px 1px rgba(0, 0, 0, .25);
     }
     
@@ -91,7 +92,7 @@
     }
     
     .photoMargin {
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
     
     .boldTheTags {
@@ -128,13 +129,42 @@
     /* The starting CSS styles for the enter animation */
     
     .fade.ng-enter {
-        transition: 0.5s linear all;
+        transition: 2.5s linear all;
         opacity: 0;
     }
     /* The finishing CSS styles for the enter animation */
     
     .fade.ng-enter.ng-enter-active {
         opacity: 1;
+    }
+    
+    .search-query {
+        color: black;
+    }
+    
+    .animate-enter,
+    .animate-leave {
+        -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        position: relative;
+        display: block;
+    }
+    
+    .animate-enter.animate-enter-active,
+    .animate-leave {
+        opacity: 1;
+        top: 0;
+        height: 30px;
+    }
+    
+    .animate-leave.animate-leave-active,
+    .animate-enter {
+        opacity: 0;
+        top: -50px;
+        height: 0px;
     }
 </style>
 
@@ -144,10 +174,10 @@
 
     <div class="row">
 
-        <div class="col-lg-6 col-xs-12">
+        <div class="col-lg-6 col-xs-6">
             <h3>Instagram:</h3>
         </div>
-        <div class="col-lg-6 col-xs-12">
+        <div class="col-lg-6 col-xs-6">
             <input class="inputBox" type="text" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
         </div>
 
@@ -155,10 +185,30 @@
     <div class="theWhiteLine"></div>
     <div class="clearFloat"></div>
 
+    <!--
+    <div ng-init="names=['Igor Minar', 'Brad Green', 'Dave Geddes', 'Naomi Black', 'Greg Weber', 'Dean Sofer', 'Wes Alvaro', 'John Scott', 'Daniel Nadasi'];">
+        <div class="well" style="margin-top: 30px; width: 200px; overflow: hidden;">
+            <form class="form-search">
+                <div class="input-append">
+                    <input type="text" ng-model="search" class="search-query" style="width: 80px">
+                    <button type="submit" class="btn">Search</button>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-animate="'animate'" ng-repeat="name in names | filter:search">
+                        <a href="#"> {{name}} </a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+-->
+
     <div class="row">
-        <div ng-repeat="data in instagramData.data">
+        <div ng-animate="animate" ng-animate="'animate'" ng-repeat="data in instagramData.data">
+
             <div class="col-md-6">
-                <div class="col-md-12 igCard" ng-if="bool" class="fade">
+
+                <div class="col-md-12 igCard">
                     <div class="igCardHeaderMargin">
                         <div class="col-xs-3 col-md-4 col-lg-4">
                             <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
@@ -191,25 +241,4 @@
 </div>
 
 <script>
-    //    $(function () {
-    //        setTimeout(function () {
-    //            let igCardHeight = 0;
-    //
-    //            console.info('igCardHeight: ' + igCardHeight);
-    //
-    //            $('.igCard').each(function () {
-    //
-    //                if (igCardHeight <= $(this).height()) {
-    //
-    //                    igCardHeight = $(this).height();
-    //
-    //                    console.info('igCardHeight: ' + igCardHeight);
-    //
-    //                    $(this).height(igCardHeight).css({
-    //                        height: igCardHeight
-    //                    });
-    //                }
-    //            });
-    //        }, 3000);
-    //    });
 </script>

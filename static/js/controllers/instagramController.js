@@ -11,7 +11,10 @@ angular.module("mainModule")
 
         console.log($scope.tagQuery);
 
+        $scope.aninamte = true;
+
         $scope.windowInfoWithToken = dataService.getWindowInfo();
+
         console.warn($scope.windowInfoWithToken);
 
         $scope.tapIgApiCUSTOM = function () {
