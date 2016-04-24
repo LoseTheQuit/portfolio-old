@@ -15,7 +15,11 @@ let fs = require('fs'),
 let client_id = "b23670e220f14f1c89c11f627c9f9953";
 let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
 let redirect_uri = 'http://localhost:5000/views/mainShell.html';
-var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
+
+
+
+// Use this to hide the client id
+//var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
 
 app.use(bodyParser.json());
 
