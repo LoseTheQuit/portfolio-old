@@ -25,11 +25,12 @@
         line-height: 50px;
         display: block;
         margin-bottom: 25px;
+        margin-top: 25px;
         color: #fff;
         border: 1px solid #fff;
         box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
         text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
-        background: rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
     }
     
     .ghostButton:hover {
@@ -46,7 +47,9 @@
     .igCard {
         /* width: 50%; */
         background: #fff;
-        padding: 25px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding: 5px;
         height: 100%;
         text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
         box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
@@ -91,19 +94,36 @@
         margin-bottom: 50px;
     }
     
-    .igCardPostLink {
-        color: #fff;
-        margin-top: 10px;
-        display: block;
-    }
-    
     .boldTheTags {
         font-size: 24px;
         font-weight: 600;
     }
     
+    .igCardPostLink {
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+    
+    .igLink:hover {
+        cursor: pointer;
+        color: rgba(255, 255, 255, .75);
+        transition: all linear 1s;
+        text-decoration: none;
+    }
+    
     .igCardTagLink {
         color: #fff;
+    }
+    
+    .displayInline {
+        display: inline;
+    }
+    
+    .igCard .col-xs-9,
+    .igCard .col-xs-3 {
+        padding: 15px;
     }
 </style>
 
@@ -113,10 +133,10 @@
 
     <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
             <h3>Instagram:</h3>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-xs-6">
             <input class="inputBox" type="text" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
         </div>
 
@@ -126,30 +146,32 @@
 
     <div class="row">
         <div ng-repeat="data in instagramData.data">
-            <div class="col-md-6 igCard">
-                <div class="igCardHeaderMargin">
-                    <div class="col-md-3">
-                        <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+            <div class="col-md-6">
+                <div class="col-md-12 igCard">
+                    <div class="igCardHeaderMargin">
+                        <div class="col-xs-3 col-md-4 col-lg-4">
+                            <img class="injectedImage" ng-src="{{data.user.profile_picture}}">
+                        </div>
+                        <div class="col-xs-9 col-md-8 col-lg-8">
+                            <p class="screenName">{{data.user.username}}</p>
+                            <p class="fullName">{{data.user.full_name}}</p>
+                        </div>
                     </div>
-                    <div class="col-md-9">
-                        <p class="screenName">{{data.user.username}}</p>
-                        <p class="fullName">{{data.user.full_name}}</p>
-                    </div>
-                </div>
-                <div class="col-md-12 photoMargin">
-                    <center>
-                        <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
-                    </center>
-                </div>
-
-                <div class="col-md-12">
-                    <p class="boldTheTags">tags:</p>
-
-                    <div ng-repeat="data in data.tags">
-                        <a ng-href="#" class="igCardTagLink">{{data}}</a>
+                    <div class="col-md-12 photoMargin">
+                        <center>
+                            <img class="injectedImage" ng-src="{{data.images.low_resolution.url}}">
+                        </center>
                     </div>
 
-                    <a ng-href={{data.link}} target="_blank" class="igCardPostLink">{{data.link}}</a>
+                    <div class="col-md-12">
+                        <p class="boldTheTags">tags:</p>
+
+                        <div ng-repeat="data in data.tags" class="displayInline">
+                            <a ng-href="" ng-model="tagQuery" ng-click="tagQuery(data)" class="igCardTagLink igLink">#{{data}}</a>
+                        </div>
+
+                        <a ng-href={{data.link}} target="_blank" class="igCardPostLink igLink">{{data.link}}</a>
+                    </div>
                 </div>
             </div>
 

@@ -8,7 +8,10 @@ angular.module("mainModule")
         console.log("INSIDE initController");
 
         $scope.instagramDataLink = 'https://www.instagram.com/oauth/authorize?client_id=b23670e220f14f1c89c11f627c9f9953&redirect_uri=http://localhost:5000/views/mainShell.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
-
+        console.log($scope.tagQuery);
+        console.log($scope.tagQuery);
+        console.log($scope.tagQuery);
+        console.log($scope.tagQuery);
         $scope.windowInfoWithToken = dataService.getWindowInfo();
         console.warn($scope.windowInfoWithToken);
 
@@ -16,8 +19,18 @@ angular.module("mainModule")
 
             dataService.tapInstaExtended($scope.windowInfoWithToken, $scope.instaQuery, function (response) {
 
-                console.warn(response.data);
+                // console.info(response.data);
+                $scope.instagramData = response.data;
 
+            });
+
+        };
+
+        $scope.tagQuery = function (instaQuery) {
+
+            dataService.tapInstaExtended($scope.windowInfoWithToken, instaQuery, function (response) {
+
+                // console.info(response.data);
                 $scope.instagramData = response.data;
 
             });

@@ -55,10 +55,22 @@
         .customJumbotron {
             height: 100vh;
             color: #005693;
-            background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') no-repeat center center;
+            background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') center center;
             /*            */
             background-size: cover;
-            /*            display: none;*/
+            -webkit-animation: mymove 400s infinite;
+            animation: mymove 400s infinite;
+            /*            background-position: 0px 0;*/
+            /* Chrome, Safari, Opera */
+        }
+        
+        @-webkit-keyframes mymove {
+            0% {
+                background-position: 4000px 0;
+            }
+            100% {
+                background-position: -4000px 0;
+            }
         }
         
         .imageOverlay {
@@ -71,6 +83,21 @@
         .floatRight {
             float: right;
         }
+        
+        @media (max-width: 640px) {
+            .headLine {
+                text-align: center;
+                margin-bottom: 400px;
+            }
+            .ghostButton {
+                margin: 0 auto;
+                float: none;
+            }
+        }
+        
+        .customCardBackground {
+            background: rgba(0, 0, 0, .5);
+        }
     </style>
 </head>
 
@@ -82,12 +109,12 @@
     <div class="row customJumbotron">
         <div class="container">
             <div class="headerheightAdjustments">
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div>
                         <h1 class="headLine">werkspayce</h1>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <a class="ghostButton floatRight" href="{{instagramDataLink}}">
                         <center>
                             login
