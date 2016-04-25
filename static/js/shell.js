@@ -1,1 +1,1 @@
- angular.module("shell", []);
+ angular.module("shell", ['ngAnimate']);

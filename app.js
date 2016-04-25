@@ -11,10 +11,13 @@ let fs = require('fs'),
     request = require('request');
 
 
+//let client_id = "b23670e220f14f1c89c11f627c9f9953";
+//let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+//let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
 
-let client_id = "b23670e220f14f1c89c11f627c9f9953";
-let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
+let client_id = "d0f6230a40954cb2823768aa53910a5e";
+let client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+let redirect_uri = 'http://localhost:5000/views/mainShell.html';
 
 
 // Use this to hide the client id
@@ -29,6 +32,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('static'));
 
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
 var twitterClient = new Twitter({
     consumer_key: 'qiQPf27ifq8tSBHCAqtu6iHLU',
     consumer_secret: 'hMNZdyYyVT4SXTGbd60qE5WVe8wfO9no0mlvJNseRreJDumjQP',

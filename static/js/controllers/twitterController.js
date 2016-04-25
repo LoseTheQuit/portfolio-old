@@ -1,7 +1,7 @@
 'use strict';
 console.log("outer mashupController");
 
-//angular.module("shell")
+//angular.module("shell")      
 angular.module("mainModule")
     .controller('mashupController', function ($scope, mashupService) {
 
