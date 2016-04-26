@@ -15,8 +15,6 @@ angular.module("mainModule")
 
         $scope.windowInfoWithToken = dataService.getWindowInfo();
 
-        // console.warn($scope.windowInfoWithToken);
-
         $scope.tapIgApiCUSTOM = function () {
 
             dataService.tapInstaExtended($scope.windowInfoWithToken, $scope.instaQuery, function (response) {
@@ -41,8 +39,6 @@ angular.module("mainModule")
 
         dataService.tapInsta($scope.windowInfoWithToken, function (response) {
 
-
-
             $scope.instagramData = response.data;
 
             if (!response.data.access_token == undefined) {
@@ -50,9 +46,7 @@ angular.module("mainModule")
                 $scope.instagramDataWithToken = response.data.access_token;
             }
 
-
             console.info(response.data);
         });
-
 
     });

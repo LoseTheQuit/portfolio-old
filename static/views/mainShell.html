@@ -31,6 +31,10 @@
             width: 90%;
         }
         
+        .floatRight {
+            float: right;
+        }
+        
         .headerheightAdjustments {
             margin-top: 50px;
             margin-bottom: 500px;
@@ -41,46 +45,48 @@
             color: #fff;
         }
         
-        .jumboTronImageOverlay {
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .75);
-        }
-        
-        .genetics {
-            width: 100%;
-        }
-        
         .customJumbotron {
             height: 100vh;
             color: #005693;
             background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') center center;
+            background: none, url('../img/werkspayce-bg.png') center center;
             /*            */
             background-size: cover;
-            -webkit-animation: mymove 400s infinite;
-            animation: mymove 400s infinite;
-            /*            background-position: 0px 0;*/
-            /* Chrome, Safari, Opera */
+            -webkit-animation: bgMove 1000s infinite;
+            animation: bgMove 1000s infinite;
         }
         
-        @-webkit-keyframes mymove {
+        .customJumbotronOverlay {
+            width: 100%;
+            height: 100%;
+            -webkit-animation: fgMove 400s infinite;
+            animation: fgMove 400s infinite;
+            background: url('../img/customJumbotronoverlay.svg') no-repeat;
+            background-size: cover;
+        }
+        
+        @-webkit-keyframes bgMove {
             0% {
                 background-position: 4000px 0;
             }
-            100% {
+            50% {
                 background-position: -4000px 0;
+            }
+            100% {
+                background-position: 4000px 0;
             }
         }
         
-        .imageOverlay {
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .25);
-            color: #fff;
-        }
-        
-        .floatRight {
-            float: right;
+        @-webkit-keyframes fgMove {
+            0% {
+                background-position: 200px 0;
+            }
+            50% {
+                background-position: -2500px 0;
+            }
+            100% {
+                background-position: 200px 0;
+            }
         }
         
         @media (max-width: 640px) {
@@ -94,111 +100,134 @@
             }
         }
         
-        .customCardBackground {
+        .inputBox {
+            width: 50%;
+            height: 40px;
+            color: #000;
+            padding: 10px;
+            border: solid 1px rgba(0, 0, 0, .25);
+            box-shadow: inset 0 0 0 1px #707070;
+            transition: box-shadow 0.3s, border 0.3s;
+            margin-bottom: 10px;
+            vertical-align: middle;
+            /* margin: 0 auto; */
+            /* margin-top: 120px; */
+            display: inline;
+            /* float: right; */
+        }
+        
+        .inputBox:focus,
+        .inputBox input[type="text"].focus {
+            border: solid 1px rgba(0, 0, 0, .50);
+        }
+        
+        .affix-top,
+        .affix {
+            position: static;
+        }
+        
+        #sidebar {
             background: rgba(0, 0, 0, .5);
+            border: 1px solid #fff;
+            width: 100%;
+            height: 90%;
         }
         
-        .animate-enter,
-        .animate-leave {
-            -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            position: relative;
-            display: block;
+        @media (min-width: 979px) {
+            #sidebar.affix-top {
+                position: static;
+                /*   margin-top: 30px; */
+                width: 228px;
+            }
+            #sidebar.affix {
+                position: fixed;
+                top: 5%;
+                width: 228px;
+            }
         }
         
-        .animate-enter.animate-enter-active,
-        .animate-leave {
-            opacity: 1;
-            top: 0;
-            height: 30px;
+        .beaker {
+            width: 100%;
+            height: 100%;
         }
         
-        .animate-leave.animate-leave-active,
-        .animate-enter {
-            opacity: 0;
-            top: -50px;
-            height: 0px;
+        .displayFlex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .custonContainer {
-            width: 90%;
-        }
-        
-        .animate-enter,
-        .animate-leave {
-            -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-            position: relative;
-            display: block;
-        }
-        
-        .animate-enter.animate-enter-active,
-        .animate-leave {
-            opacity: 1;
-            top: 0;
-            height: 30px;
-        }
-        
-        .animate-leave.animate-leave-active,
-        .animate-enter {
-            opacity: 0;
-            top: -50px;
-            height: 0px;
+        .socialIconSideBar {
+            width: 15%;
+            margin: 15px;
+            /* margin-top: 120px; */
         }
     </style>
 </head>
 
-
 <body ng-app="mainModule">
 
     <div class="row customJumbotron">
-        <div class="container">
-            <div class="headerheightAdjustments">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div>
-                        <h1 class="headLine">werkspayce</h1>
+        <div class="customJumbotronOverlay">
+            <div class="container">
+                <div class="headerheightAdjustments">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div>
+                            <h1 class="headLine">werkspayce</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <a class="ghostButton floatRight" href="{{instagramDataLinkTEMP}}">
+                            <center>
+                                login
+                            </center>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <a class="ghostButton floatRight" href="{{instagramDataLinkTEMP}}">
-                        <center>
-                            login
-                        </center>
-                    </a>
-                </div>
-
             </div>
 
         </div>
     </div>
 
-    <!--
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="theWhiteLine"></div>
-                        <div class="clearFloat"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
-    <!--custonContainer-->
+    <div class="stickyLine"></div>
+
     <div class="container" id="socialContainer">
         <div class="row">
-            <div class="col-lg-6">
+
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="row">
+                        <div id="leftCol">
+                            <ul class="nav nav-stacked" id="sidebar">
+                                <div class="beaker displayFlex">
+
+                                    <center>
+
+                                        <img class="socialIconSideBar" src="../img/svg/instagram.svg">
+
+                                        <input class="inputBox" type="text" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
+
+                                    </center>
+                                    <center>
+
+                                        <img class="socialIconSideBar" src="../img/svg/twitter.svg">
+
+                                        <input class="inputBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
+
+                                    </center>
+
+
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
                 <instagram></instagram>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <mashup></mashup>
             </div>
         </div>
@@ -209,7 +238,6 @@
     <script src="../js/universal/parallax.js"></script>
 
     <!-- ANGULAR IMPORTS -->
-
 
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
@@ -234,33 +262,26 @@
                 // Animation complete
 
             });
-            $(".igCard").animate({
-                opacity: '1'
-            }, 10000);
-            //            $("div.igCard").slideUp(300).delay(800).fadeIn(400);
-            //            $("div.igCard").slideUp(300).fadeIn(400);
-            //            (".igCard").animate({
-            //                opacity: 1
-            //            }, 700);
-            $(".igCard").fadeIn("slow", function () {
-                console.log('igCard INSIDE')
-                    // Animation complete
+
+            var stickyLine = document.querySelector('.stickyLine');
+            var stickyLinePosition = stickyLine.getBoundingClientRect().top;
+            console.log(stickyLinePosition)
+            console.log(stickyLinePosition)
+            console.log(stickyLinePosition)
+            console.log(stickyLinePosition)
+            $('#sidebar').affix({
+                offset: {
+                    top: stickyLinePosition
+                }
             });
-            $(".injectedImage").fadeIn(1000, function () {
-                console.log('INJECT INSIDE')
-                    // Animation complete
+
+            var $body = $(document.body);
+            var navHeight = $('.navbar').outerHeight(true) + 10;
+
+            $body.scrollspy({
+                target: '#leftCol',
+                offset: navHeight
             });
-        });
-        $(document).ready(function () {
-            //            $("#book").fadeIn("slow", function () {
-            //                // Animation complete
-            //            });
-            //            // Handler for .ready() called.
-            //            $(".btn").click(function () {
-            //                $(this).animate({
-            //                    scrollTop: $('#socialContainer').offset().top
-            //                }, 'slow');
-            //            });
         });
     </script>
 
