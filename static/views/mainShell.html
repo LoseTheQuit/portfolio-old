@@ -209,7 +209,7 @@
                             </center>
                         </a>
                     </div>
-                    <div class="clearGhostFloat"></div>
+
                 </div>
             </div>
 
@@ -304,27 +304,11 @@
             var instaCardWidth = $('.igCard').width();
             var tweetCardWidth = $('.tweetCard').width();
 
-            //            if (($(window).width() + 17) > 1200) {
-            ////                // if (tweetCardWidth < 499) {}
-            ////                $('#sidebar').css('width', tweetCardWidth - 75);
-            ////            } else {
-            //                $('#sidebar').css('width', '100px;');
-            //            }
-
             $(window).resize(function () {
                 instaCardWidth = $('.igCard').width();
                 tweetCardWidth = $('.tweetCard').width();
 
-
-                if (($(window).width() + 17) > 0) {
-
-                    $('.clearGhostFloat').css('clear', 'both');
-
-                }
-
                 if (($(window).width() + 17) > 1200) {
-
-                    // if (tweetCardWidth < 499) {}
 
                     $('#sidebar').css('position', 'fixed');
                     $('#sidebar').css('width', tweetCardWidth - 75);
@@ -333,11 +317,12 @@
                     $('#sidebar').css('position', 'relative');
                     $('#sidebar').css('width', '100%');
                 }
-                console.log('WINDA: ' + ($(window).width() + 17) + '\n')
-                console.log('INSTA: ' + instaCardWidth + '\n')
-                console.log('TWEET: ' + tweetCardWidth + '\n')
-                console.log('SIDEBAR: ' + $('#sidebar').width() + '\n');
-                console.log('DIFF: ' + (tweetCardWidth - instaCardWidth));
+
+                console.log('WINDA: ' + ($(window).width() + 17));
+                console.log('INSTA: ' + instaCardWidth);
+                console.log('TWEET: ' + tweetCardWidth);
+                console.log('SIDEBAR: ' + $('#sidebar').width());
+                console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
 
             });
 
