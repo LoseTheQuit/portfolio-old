@@ -11,13 +11,13 @@ let fs = require('fs'),
     request = require('request');
 
 
-let client_id = "b23670e220f14f1c89c11f627c9f9953";
-let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
+//let client_id = "b23670e220f14f1c89c11f627c9f9953";
+//let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+//let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
 
-//let client_id = "d0f6230a40954cb2823768aa53910a5e";
-//let client_secret = "bfb29d9f5ee94a46a675f771e9013477";
-//let redirect_uri = 'http://localhost:5000/views/mainShell.html';
+let client_id = "d0f6230a40954cb2823768aa53910a5e";
+let client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+let redirect_uri = 'http://localhost:5000/views/mainShell.html';
 
 // Use this to hide the client id
 //var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
@@ -160,6 +160,7 @@ app.post('/ig', function (req, res, next) {
             checkCodeContainer()
 
             // res.send(customRequest());
+
             var from_the_docs = {
                 url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + tokenContainer[0],
                 method: 'GET'
@@ -191,9 +192,7 @@ app.post('/ig', function (req, res, next) {
                 method: 'GET'
             }
 
-            //
-
-            // THESE WORK
+            // THESE WORK - thisIsCamelCaseAsAnExample this
 
             var self_search = {
                 url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + tokenContainer[0] + '&count=300',

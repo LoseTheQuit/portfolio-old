@@ -28,7 +28,7 @@
         }
         
         .container {
-            width: 90%;
+            width: 95%;
         }
         
         .floatRight {
@@ -79,24 +79,36 @@
         
         @-webkit-keyframes fgMove {
             0% {
-                background-position: 200px 0;
+                background-position: 0 0;
             }
             50% {
-                background-position: -2500px 0;
+                background-position: -1000px 0;
             }
             100% {
-                background-position: 200px 0;
+                background-position: 0 0;
             }
         }
         
-        @media (max-width: 640px) {
+        @media (max-width: 767px) {
             .headLine {
                 text-align: center;
-                margin-bottom: 300px;
+                margin-bottom: 125px;
             }
             .ghostButton {
                 margin: 0 auto;
                 float: none;
+                width: 200px;
+                height: 50px;
+                cursor: pointer;
+                line-height: 50px;
+                display: block;
+                margin-bottom: 25px;
+                margin-top: 25px;
+                color: #fff;
+                border: 1px solid #fff;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+                text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+                background: rgba(0, 0, 0, .5);
             }
         }
         
@@ -133,16 +145,30 @@
             height: 90%;
         }
         
-        @media (min-width: 979px) {
+        @media (min-width: 990px) {
             #sidebar.affix-top {
                 position: static;
-                /*   margin-top: 30px; */
+                /*   margin-top: 30px;  */
                 width: 228px;
             }
             #sidebar.affix {
                 position: fixed;
                 top: 5%;
                 width: 228px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            #sidebar.affix-top {
+                position: relative;
+                margin-top: 30px;
+                width: 100%;
+            }
+            #sidebar.affix {
+                position: relative;
+                top: 5%;
+                width: 100%;
+                margin-top: 50px;
             }
         }
         
@@ -177,12 +203,13 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="ghostButton floatRight" href="{{instagramDataLink}}">
+                        <a class="ghostButton floatRight" href="{{instagramDataLinkTEMP}}">
                             <center>
                                 login
                             </center>
                         </a>
                     </div>
+                    <div class="clearGhostFloat"></div>
                 </div>
             </div>
 
@@ -194,28 +221,23 @@
     <div class="container" id="socialContainer">
         <div class="row">
 
-            <div class="col-md-2">
+            <div class="col-lg-2 col-md-12">
                 <div class="container">
                     <div class="row">
                         <div id="leftCol">
                             <ul class="nav nav-stacked" id="sidebar">
+
                                 <div class="beaker displayFlex">
 
                                     <center>
-
                                         <img class="socialIconSideBar" src="../img/svg/instagram.svg">
-
                                         <input class="inputBox" type="text" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
-
                                     </center>
+
                                     <center>
-
                                         <img class="socialIconSideBar" src="../img/svg/twitter.svg">
-
                                         <input class="inputBox" type="text" ng-model="inputQuery" ng-change="changeThis()">
-
                                     </center>
-
 
                                 </div>
                             </ul>
@@ -224,10 +246,10 @@
                 </div>
             </div>
 
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-12">
                 <instagram></instagram>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5 col-md-12">
                 <mashup></mashup>
             </div>
         </div>
@@ -242,7 +264,6 @@
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
 
-
     <script src="../js/main.js"></script>
     <script src="../js/controllers/instagramController.js"></script>
     <script src="../js/controllers/twitterController.js"></script>
@@ -256,19 +277,16 @@
         $(function () {
             $("body").fadeOut(0).fadeIn(1000, function () {
                 // Animation complete
-
             });
+
             $(".ghostButton").fadeOut(0).fadeIn(1000, function () {
                 // Animation complete
-
             });
 
             var stickyLine = document.querySelector('.stickyLine');
             var stickyLinePosition = stickyLine.getBoundingClientRect().top;
             console.log(stickyLinePosition)
-            console.log(stickyLinePosition)
-            console.log(stickyLinePosition)
-            console.log(stickyLinePosition)
+
             $('#sidebar').affix({
                 offset: {
                     top: stickyLinePosition
@@ -282,6 +300,47 @@
                 target: '#leftCol',
                 offset: navHeight
             });
+
+            var instaCardWidth = $('.igCard').width();
+            var tweetCardWidth = $('.tweetCard').width();
+
+            //            if (($(window).width() + 17) > 1200) {
+            ////                // if (tweetCardWidth < 499) {}
+            ////                $('#sidebar').css('width', tweetCardWidth - 75);
+            ////            } else {
+            //                $('#sidebar').css('width', '100px;');
+            //            }
+
+            $(window).resize(function () {
+                instaCardWidth = $('.igCard').width();
+                tweetCardWidth = $('.tweetCard').width();
+
+
+                if (($(window).width() + 17) > 0) {
+
+                    $('.clearGhostFloat').css('clear', 'both');
+
+                }
+
+                if (($(window).width() + 17) > 1200) {
+
+                    // if (tweetCardWidth < 499) {}
+
+                    $('#sidebar').css('position', 'fixed');
+                    $('#sidebar').css('width', tweetCardWidth - 75);
+
+                } else {
+                    $('#sidebar').css('position', 'relative');
+                    $('#sidebar').css('width', '100%');
+                }
+                console.log('WINDA: ' + ($(window).width() + 17) + '\n')
+                console.log('INSTA: ' + instaCardWidth + '\n')
+                console.log('TWEET: ' + tweetCardWidth + '\n')
+                console.log('SIDEBAR: ' + $('#sidebar').width() + '\n');
+                console.log('DIFF: ' + (tweetCardWidth - instaCardWidth));
+
+            });
+
         });
     </script>
 
