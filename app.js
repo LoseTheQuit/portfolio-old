@@ -12,12 +12,12 @@ let fs = require('fs'),
 
 
 //let client_id = "b23670e220f14f1c89c11f627c9f9953";
-//let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-//let redirect_uri = 'https://losethequit.herokuapp.com/views/mainShell.html';
+//let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2"; 
+//let redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
 
 let client_id = "d0f6230a40954cb2823768aa53910a5e";
 let client_secret = "bfb29d9f5ee94a46a675f771e9013477";
-let redirect_uri = 'http://localhost:5000/views/mainShell.html';
+let redirect_uri = 'http://localhost:5000/views/werkspayce.html';
 
 // Use this to hide the client id
 //var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
@@ -45,7 +45,8 @@ app.post('/twitter', function (req, res) {
     console.log('INCOMING POST REQUEST - Load Template');
 
     twitterClient.get('statuses/user_timeline', {
-        screen_name: 'nodejs'
+        screen_name: 'nodejs',
+        count: '50'
     }, function (error, tweets, response) {
 
         if (!error) {
@@ -68,6 +69,7 @@ app.post('/inputquery', function (req, res) {
     twitterClient.get('statuses/user_timeline', req.body, function (error, tweets, response) {
 
         if (!error) {
+            //console.log(tweets);
             res.json(tweets);
         } else {
             res.json(error);
@@ -76,6 +78,26 @@ app.post('/inputquery', function (req, res) {
     });
 
 });
+
+app.post('/searchTweetsQuery', function (req, res) {
+
+    console.log('INCOMING INPUT GET REQUEST - search-tweets-query');
+
+    console.log(req.body);
+
+    twitterClient.get('search/tweets', req.body, function (error, tweets, response) {
+
+        if (!error) {
+            //console.log(tweets);
+            res.json(tweets);
+        } else {
+            res.json(error);
+            console.log(error);
+        }
+    });
+
+});
+
 app.get('/', function (req, res) {
 
     console.log('INCOMING GET REQUEST - Load Template');

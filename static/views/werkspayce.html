@@ -31,6 +31,15 @@
             width: 95%;
         }
         
+        .theWhiteLine {
+            width: 100%;
+            margin-bottom: 50px;
+            float: left;
+            background: #fff;
+            height: 3px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+        
         .floatRight {
             float: right;
         }
@@ -188,6 +197,48 @@
             margin: 15px;
             /* margin-top: 120px; */
         }
+        
+        .add20pxPadding {
+            padding: 20px;
+        }
+        
+        .addSomeMarginBottom {
+            margin-bottom: 25px;
+        }
+        
+        .cardImage {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cardImage:hover {
+            /*
+            -webkit-transform: scale(1.25);
+            -moz-transform: scale(1.25);
+            -ms-transform: scale(1.25);
+            -o-transform: scale(1.25);
+            transform: scale(1.25);
+            */
+        }
+        
+        .cardImageOverLay {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+        }
+        
+        .cardLink {
+            display: block;
+            color: #00a3e0;
+        }
+        
+        .cardLink:hover {
+            text-decoration: none;
+            cursor: pointer;
+            color: rgba(255, 255, 255, .90);
+            transition: all linear 1s;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -203,7 +254,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="ghostButton floatRight" href="{{instagramDataLinkTEMP}}">
+                        <a class="ghostButton floatRight" ng-href="{{instagramDataLinkTEMP}}">
                             <center>
                                 login
                             </center>
@@ -226,17 +277,21 @@
                     <div class="row">
                         <div id="leftCol">
                             <ul class="nav nav-stacked" id="sidebar">
-
                                 <div class="beaker displayFlex">
 
                                     <center>
-                                        <img class="socialIconSideBar" src="../img/svg/instagram.svg">
-                                        <input class="inputBox" type="text" placeholder="Twitter" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
+                                        <img class="socialIconSideBar" src="../img/svg/twitter.svg">
+                                        <input class="inputBox" type="text" placeholder="Twitter" ng-model="inputQuery" ng-change="changeThis()">
                                     </center>
 
                                     <center>
-                                        <img class="socialIconSideBar" src="../img/svg/twitter.svg">
-                                        <input class="inputBox" type="text" placeholder="Instagram" ng-model="inputQuery" ng-change="changeThis()">
+                                        <img class="socialIconSideBar" src="../img/svg/default-icon.svg">
+                                        <input class="inputBox" type="text" placeholder="Search Tweets" ng-model="inputSearchTweetsQuery" ng-change="changeThisSearchTweets()" ng-click="goCats = !goCats">
+                                    </center>
+
+                                    <center>
+                                        <img class="socialIconSideBar" src="../img/svg/instagram.svg">
+                                        <input class="inputBox" type="text" placeholder="Instagram" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
                                     </center>
 
                                 </div>
@@ -247,10 +302,10 @@
             </div>
 
             <div class="col-lg-5 col-md-12">
-                <instagram></instagram>
+                <mashup></mashup>
             </div>
             <div class="col-lg-5 col-md-12">
-                <mashup></mashup>
+                <instagram></instagram>
             </div>
         </div>
     </div>
@@ -271,6 +326,7 @@
     <script src="../js/directives/twitterDirective.js"></script>
     <script src="../js/services/instagramService.js"></script>
     <script src="../js/services/twitterService.js"></script>
+    <script src="../js/services/alloy.js"></script>
     <!-- ANGULAR IMPORTS -->
 
     <script>
@@ -302,27 +358,45 @@
             });
 
             var instaCardWidth = $('.igCard').width();
-            var tweetCardWidth = $('.tweetCard').width();
+            var tweetCardWidth = $('.cardImage').width();
 
-            $(window).resize(function () {
-                instaCardWidth = $('.igCard').width();
-                tweetCardWidth = $('.tweetCard').width();
+            setInterval(function () {
 
-                if (($(window).width() + 17) > 1200) {
-
-                    $('#sidebar').css('position', 'fixed');
-                    $('#sidebar').css('width', tweetCardWidth - 75);
-
-                } else {
-                    $('#sidebar').css('position', 'relative');
-                    $('#sidebar').css('width', '100%');
-                }
-
+                console.log('\n');
                 console.log('WINDA: ' + ($(window).width() + 17));
                 console.log('INSTA: ' + instaCardWidth);
                 console.log('TWEET: ' + tweetCardWidth);
                 console.log('SIDEBAR: ' + $('#sidebar').width());
                 console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
+                console.log('\n');
+
+            }, 1000);
+
+            $(window).resize(function () {
+                instaCardWidth = $('.igCard').width();
+                tweetCardWidth = $('.cardImage').width();
+
+                if (($(window).width() + 17) > 1200) {
+
+                    $('#sidebar').css('position', 'fixed');
+
+                    if (tweetCardWidth <= 101)
+                        $('#sidebar').css('width', 300 - 75);
+                    else
+                        $('#sidebar').css('width', tweetCardWidth - 75);
+
+
+                } else {
+                    $('#sidebar').css('position', 'relative');
+                    $('#sidebar').css('width', '100%');
+                }
+                console.log('\n');
+                console.log('WINDA: ' + ($(window).width() + 17));
+                console.log('INSTA: ' + instaCardWidth);
+                console.log('TWEET: ' + tweetCardWidth);
+                console.log('SIDEBAR: ' + $('#sidebar').width());
+                console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
+                console.log('\n');
 
             });
 

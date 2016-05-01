@@ -5,6 +5,7 @@ console.log("outer mashupServiceData");
 //angular.module("shell")
 angular.module("mainModule")
     .service('mashupService', function ($http) {
+
         console.log("mashupServiceData initialized!");
 
         this.getTwitter = function (callback) {
@@ -14,7 +15,8 @@ angular.module("mainModule")
                 url: '/twitter',
                 method: "POST",
                 data: {
-                    screen_name: 'nodejs'
+                    screen_name: 'nodejs',
+                    count: 10
                 }
             })
 
@@ -34,22 +36,10 @@ angular.module("mainModule")
 
             .then(callback);
 
-            console.log('params: ' + params)
+            // console.log('params: ' + params)
             console.log('sn: ' + params.screen_name)
 
         };
 
-        this.getInstagramExtended = function (callback) {
-
-
-            $http({
-                url: '/ig',
-                method: "POST"
-            })
-
-
-            .then(callback);
-
-        };
 
     });

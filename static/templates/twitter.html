@@ -1,12 +1,8 @@
 <style>
     .tweetCard {
         min-height: 305px;
-    }
-    
-    .tweetData {
         box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
         text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
-        padding: 20px;
         color: #fff;
         height: 100%;
         width: 100%;
@@ -15,15 +11,9 @@
         background: rgba(0, 0, 0, .5);
     }
     
-    .displayBlock {
-        display: block;
-        color: #00a3e0;
-    }
-    
-    .displayBlock:hover {
-        color: #fff;
-        transition: all linear .50s;
-        text-decoration: none;
+    .tweetCardSpacer {
+        margin-bottom: 100px;
+        padding-bottom: 100px;
     }
 </style>
 
@@ -36,16 +26,69 @@
     </div>
     <div class="theWhiteLine"></div>
     <div class="clearFloat"></div>
+
     <div class="row">
-        <div class="col-md-6 col-xs-12 tweetCard" ng-repeat="tweets in twitterdata">
-            <div class="tweetData">
-                <p>{{tweets.created_at}}</p>
-                <p>{{tweets.user.name}}</p>
-                <p>{{tweets.text}}</p>
-                <p>Retweet count: {{tweets.retweet_count}}</p>
-                <a class="displayBlock" href="{{tweets.user.url}">{{tweets.user.url}}</a>
+        <div class="col-md-6 col-xs-12" ng-repeat="tweet in twitterData.data">
+            <div class="tweetCard addSomeMarginBottom">
+                <div class="cardImage" style="background: url('{{tweet.user.profile_background_image_url}}') no-repeat center center; background-size: cover;">
+                    <div class="cardImageOverLay add20pxPadding">
+
+                        <p>USER DATA</p>
+
+                        <div class="tweetCardSpacer"></div>
+                        <div class="igCardHeaderMargin"></div>
+
+                        <p class="screenName">{{tweet.user.name}}</p>
+                        <p>{{tweet.user.location}}</p>
+                        <p>favourites_count: {{tweet.user.favourites_count}}</p>
+                        <!-- <p>description: {{tweet.user.description}}</p> -->
+                        <p>friends_count: {{tweet.user.friends_count}}</p>
+                        <p>follcowers_count: {{tweet.user.followers_count}}</p>
+                        <p>Tweets: {{tweet.user.statuses_count}}</p>
+                        <p>{{data.text}}</p>
+                        <p>Retweet count: {{tweet.retweet_count}}</p>
+                        <p>{{tweet.created_at}}</p>
+                        <a class="cardLink" href="{{tweets.user.url}">{{tweet.user.url}}</a>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12" ng-repeat="tweet in twitterData.statuses">
+            <div class="tweetCard addSomeMarginBottom">
+                <div class="cardImage" style="background: url('{{tweet.user.profile_background_image_url}}') no-repeat center center; background-size: cover;">
+                    <div class="cardImageOverLay add20pxPadding">
+                        <p>TAG SEARCH</p>
+
+                        <div class="tweetCardSpacer"></div>
+                        <div class="igCardHeaderMargin"></div>
+
+                        <div class="col-xs-3 col-md-4 col-lg-4">
+                            <!-- <img class="injectedImage" ng-src="{{data.user.profile_image_url}}"> -->
+                        </div>
+                        <div class="col-xs-9 col-md-8 col-lg-8">
+                            <!-- <p class="screenName">{{data.user.username}}</p> -->
+                        </div>
+
+                        <p class="screenName">{{tweet.user.name}}</p>
+                        <p>{{tweet.user.location}}</p>
+                        <!-- <p>{{tweet.user.description}}</p> -->
+                        <p>favourites_count: {{tweet.user.favourites_count}}</p>
+                        <p>friends_count: {{tweet.user.friends_count}}</p>
+                        <p>follcowers_count: {{tweet.user.followers_count}}</p>
+                        <p>Tweets: {{tweet.user.statuses_count}}</p>
+                        <p>{{tweet.text}}</p>
+                        <p>Retweet count: {{tweet.retweet_count}}</p>
+                        <p>{{tweet.created_at}}</p>
+                        <a class="cardLink" ng-href="{{tweets.user.url}" target="_blank">{{tweet.user.url}}</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
