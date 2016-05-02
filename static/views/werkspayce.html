@@ -212,13 +212,20 @@
         }
         
         .cardImage:hover {
-            /*
-            -webkit-transform: scale(1.25);
-            -moz-transform: scale(1.25);
-            -ms-transform: scale(1.25);
-            -o-transform: scale(1.25);
-            transform: scale(1.25);
-            */
+            -webkit-animation: cardImageMove 50s infinite;
+            animation: cardImageMove 50s infinite;
+        }
+        
+        @-webkit-keyframes cardImageMove {
+            0% {
+                background-position: 150 0;
+            }
+            50% {
+                background-position: -50px 0;
+            }
+            100% {
+                background-position: 150 0;
+            }
         }
         
         .cardImageOverLay {
@@ -254,7 +261,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="ghostButton floatRight" ng-href="{{instagramDataLink}}">
+                        <a class="ghostButton floatRight" ng-href="{{instagramDataLinkTEMP}}">
                             <center>
                                 login
                             </center>
@@ -307,6 +314,7 @@
             <div class="col-lg-5 col-md-12">
                 <instagram></instagram>
             </div>
+
         </div>
     </div>
 
