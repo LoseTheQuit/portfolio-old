@@ -10,7 +10,6 @@ let fs = require('fs'),
     Twitter = require('twitter'),
     request = require('request');
 
-
 let client_id = "b23670e220f14f1c89c11f627c9f9953";
 let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
 let redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';

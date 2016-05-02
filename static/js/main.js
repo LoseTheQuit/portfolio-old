@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module("mainModule", ['ngAnimate']);
+angular.module("mainModule", []);

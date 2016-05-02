@@ -3,7 +3,7 @@
 console.log("OUTSIDE dataService");
 
 angular.module("mainModule")
-    .service('dataService', function ($http) {
+    .service('instagramService', function ($http) {
 
         console.log("INSIDE dataService");
 
@@ -19,7 +19,14 @@ angular.module("mainModule")
 
             .then(callback);
         }
+
         this.tapInstaExtended = function (access_token, instaQuery, callback) {
+
+            console.log('\n');
+            console.info('OKKKKKKKKKKKS')
+            console.info('OKKKKKKKKKKKS')
+            console.info('OKKKKKKKKKKKS')
+            console.log('\n');
 
             $http({
                 method: 'POST',

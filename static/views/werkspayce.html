@@ -59,7 +59,6 @@
             color: #005693;
             background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') center center;
             background: none, url('../img/werkspayce-bg.png') center center;
-            /*            */
             background-size: cover;
             -webkit-animation: bgMove 1000s infinite;
             animation: bgMove 1000s infinite;
@@ -232,14 +231,14 @@
         .cardImageOverLay {
             width: 100%;
             height: 100%;
-            transition: all linear .5s;
+            transition: all linear .25s;
             background: rgba(0, 0, 0, .5);
         }
         
         .cardImageOverLay:hover {
             width: 100%;
             height: 100%;
-            transition: all linear 1s;
+            transition: all linear .75s;
             background: rgba(0, 0, 0, .25);
         }
         
@@ -289,36 +288,13 @@
         <div class="row">
 
             <div class="col-lg-2 col-md-12">
-                <div class="container">
-                    <div class="row">
-                        <div id="leftCol">
-                            <ul class="nav nav-stacked" id="sidebar">
-                                <div class="beaker displayFlex">
 
-                                    <center>
-                                        <img class="socialIconSideBar" src="../img/svg/twitter.svg">
-                                        <input class="inputBox" type="text" placeholder="Twitter" ng-model="inputQuery" ng-change="changeThis()">
-                                    </center>
+                <sidebar></sidebar>
 
-                                    <center>
-                                        <img class="socialIconSideBar" src="../img/svg/default-icon.svg">
-                                        <input class="inputBox" type="text" placeholder="Search Tweets" ng-model="inputSearchTweetsQuery" ng-change="changeThisSearchTweets()" ng-click="goCats = !goCats">
-                                    </center>
-
-                                    <center>
-                                        <img class="socialIconSideBar" src="../img/svg/instagram.svg">
-                                        <input class="inputBox" type="text" placeholder="Instagram" ng-model="instaQuery" ng-change="tapIgApiCUSTOM()">
-                                    </center>
-
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="col-lg-5 col-md-12">
-                <mashup></mashup>
+                <twitter></twitter>
             </div>
             <div class="col-lg-5 col-md-12">
                 <instagram></instagram>
@@ -334,87 +310,28 @@
     <!-- ANGULAR IMPORTS -->
 
     <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
 
     <script src="../js/main.js"></script>
-    <script src="../js/controllers/instagramController.js"></script>
-    <script src="../js/controllers/twitterController.js"></script>
+    <script src="../js/controllers/alloyController.js"></script>
+    <script src="../js/controllers/sidebarController.js"></script>
     <script src="../js/directives/instagramDirective.js"></script>
     <script src="../js/directives/twitterDirective.js"></script>
+    <script src="../js/directives/sidebarDirective.js"></script>
     <script src="../js/services/instagramService.js"></script>
     <script src="../js/services/twitterService.js"></script>
+    <script src="../js/services/sidebarService.js"></script>
     <script src="../js/services/alloy.js"></script>
     <!-- ANGULAR IMPORTS -->
 
     <script>
         $(function () {
+
             $("body").fadeOut(0).fadeIn(1000, function () {
                 // Animation complete
             });
 
             $(".ghostButton").fadeOut(0).fadeIn(1000, function () {
                 // Animation complete
-            });
-
-            var stickyLine = document.querySelector('.stickyLine');
-            var stickyLinePosition = stickyLine.getBoundingClientRect().top;
-            console.log(stickyLinePosition)
-
-            $('#sidebar').affix({
-                offset: {
-                    top: stickyLinePosition
-                }
-            });
-
-            var $body = $(document.body);
-            var navHeight = $('.navbar').outerHeight(true) + 10;
-
-            $body.scrollspy({
-                target: '#leftCol',
-                offset: navHeight
-            });
-
-            var instaCardWidth = $('.igCard').width();
-            var tweetCardWidth = $('.cardImage').width();
-
-            setInterval(function () {
-
-                console.log('\n');
-                console.log('WINDA: ' + ($(window).width() + 17));
-                console.log('INSTA: ' + instaCardWidth);
-                console.log('TWEET: ' + tweetCardWidth);
-                console.log('SIDEBAR: ' + $('#sidebar').width());
-                console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
-                console.log('\n');
-
-            }, 1000);
-
-            $(window).resize(function () {
-                instaCardWidth = $('.igCard').width();
-                tweetCardWidth = $('.cardImage').width();
-
-                if (($(window).width() + 17) > 1200) {
-
-                    $('#sidebar').css('position', 'fixed');
-
-                    if (tweetCardWidth <= 101)
-                        $('#sidebar').css('width', 300 - 75);
-                    else
-                        $('#sidebar').css('width', tweetCardWidth - 75);
-
-
-                } else {
-                    $('#sidebar').css('position', 'relative');
-                    $('#sidebar').css('width', '100%');
-                }
-                console.log('\n');
-                console.log('WINDA: ' + ($(window).width() + 17));
-                console.log('INSTA: ' + instaCardWidth);
-                console.log('TWEET: ' + tweetCardWidth);
-                console.log('SIDEBAR: ' + $('#sidebar').width());
-                console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
-                console.log('\n');
-
             });
 
         });

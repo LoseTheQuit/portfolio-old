@@ -13,7 +13,7 @@ angular.module("mainModule")
         };
 
 
-        this.getTwitterSearchTweets = function (params, callback) {
+        this.getTwitterAndInstagramDataByTags = function (params, callback) {
             console.log("success from callApi");
             console.log(params);
 

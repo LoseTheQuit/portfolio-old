@@ -10,7 +10,7 @@ angular.module("mainModule")
         return {
 
             templateUrl: '/templates/instagram.html',
-            controller: 'initController',
+            controller: 'alloyController',
             replace: false
         }
 

@@ -4,7 +4,7 @@ console.log("outer mashupServiceData");
 
 //angular.module("shell")
 angular.module("mainModule")
-    .service('mashupService', function ($http) {
+    .service('twitterService', function ($http) {
 
         console.log("mashupServiceData initialized!");
 
@@ -36,7 +36,6 @@ angular.module("mainModule")
 
             .then(callback);
 
-            // console.log('params: ' + params)
             console.log('sn: ' + params.screen_name)
 
         };
