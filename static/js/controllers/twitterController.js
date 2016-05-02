@@ -7,8 +7,6 @@ angular.module("mainModule")
 
         console.log("mashupController initialized!");
 
-        $scope.igRequestUri = 'https://www.instagram.com/oauth/authorize/?client_id=e272444723924d49bb78da2b5e5c4dfd&redirect_uri=https://losethequit.herokuapp.com/views/werkspayce.html/handleauth&response_type=code';
-
         mashupService.getTwitter(function (response) {
 
             var tweets = response.data;

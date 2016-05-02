@@ -52,9 +52,9 @@ angular.module("mainModule")
 
             var windowLocation = window.location.href;
             var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
-            var windowLocationWithTokenTEMP = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
+            // var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
 
-            return windowLocationWithTokenTEMP;
+            return windowLocationWithToken;
 
         };
 
