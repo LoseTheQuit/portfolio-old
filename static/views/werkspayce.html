@@ -207,6 +207,7 @@
         }
         
         .cardImage {
+            transition: all linear 1s;
             width: 100%;
             height: 100%;
         }
@@ -231,7 +232,15 @@
         .cardImageOverLay {
             width: 100%;
             height: 100%;
+            transition: all linear .5s;
             background: rgba(0, 0, 0, .5);
+        }
+        
+        .cardImageOverLay:hover {
+            width: 100%;
+            height: 100%;
+            transition: all linear 1s;
+            background: rgba(0, 0, 0, .25);
         }
         
         .cardLink {
