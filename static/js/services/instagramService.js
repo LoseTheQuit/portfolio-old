@@ -22,12 +22,6 @@ angular.module("mainModule")
 
         this.tapInstaExtended = function (access_token, instaQuery, callback) {
 
-            console.log('\n');
-            console.info('OKKKKKKKKKKKS')
-            console.info('OKKKKKKKKKKKS')
-            console.info('OKKKKKKKKKKKS')
-            console.log('\n');
-
             $http({
                 method: 'POST',
                 url: '/instaInputQuery',
@@ -58,8 +52,8 @@ angular.module("mainModule")
         this.getWindowInfo = function () {
 
             var windowLocation = window.location.href;
-            var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
-            // var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
+            // var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
+            var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
 
             return windowLocationWithToken;
 
