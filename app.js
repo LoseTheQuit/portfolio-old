@@ -166,7 +166,7 @@ app.post('/ig', function (req, res, next) {
 
         var parsedBody = JSON.parse(body);
         console.log('*******************************************************'.black.bgGreen);
-        console.log(parsedBody);
+        //  console.log(parsedBody);
         console.log('*******************************************************'.black.bgGreen);
 
         if (response.statusCode != 200) {
