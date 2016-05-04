@@ -7,9 +7,9 @@ angular.module("mainModule")
 
         console.log("INSIDE alloyController");
 
-        // $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=b23670e220f14f1c89c11f627c9f9953&redirect_uri=https://losethequit.herokuapp.com/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
+        $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=b23670e220f14f1c89c11f627c9f9953&redirect_uri=https://losethequit.herokuapp.com/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
 
-        $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
+        //        $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
 
         $scope.windowInfoWithToken = instagramService.getWindowInfo();
 
@@ -47,6 +47,23 @@ angular.module("mainModule")
 
         };
 
+        $scope.hideThisDiv = false;
+        $scope.customOverFlow = function (value) {
+
+            if ($scope.hideThisDiv) {
+
+                return {
+                    "overflow": 'auto'
+                }
+            } else {
+
+                return {
+                    "overflow": 'hidden'
+                }
+
+            }
+        }
+
         instagramService.tapInsta($scope.windowInfoWithToken, function (response) {
 
             $scope.instagramData = response.data;
@@ -54,6 +71,10 @@ angular.module("mainModule")
             if (!response.data.access_token == undefined) {
 
                 $scope.instagramDataWithToken = response.data.access_token;
+
+            } else {
+
+                $scope.hideThisDiv = true;
             }
 
             console.info(response.data);

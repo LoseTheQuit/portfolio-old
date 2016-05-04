@@ -1,25 +1,56 @@
-<div ng-controller="custCtrl">
+<!DOCTYPE html>
+<html ng-app="myApp">
 
-    <h1 ng-class="helloWorld()">My TODOs</h1>
-    <div class="dividingLine"></div>
-    <h2 ng-class="saySomethingElse()">Enter stuff with ng-model:</h2>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.js"></script>
+    <meta charset="utf-8">
+    <title>AngularJS linky Filter Example</title>
+</head>
 
-    <input type="text" ng-model="name">
-    <p>{{name}}</p>
-    <div ng-init="names=['Mark','Tom','Travis']"></div>
-    <h2>Looping with the ng-repeat</h2>
-    <h4>Internal list</h4>
-    <ul>
-        <li ng-repeat="personName in names">{{personName}}</li>
-    </ul>
-    <h4>External list</h4>
-    <input type="text" ng-model="cust">
-    <ul class="ulEdit">
-        <li ng-repeat="cust in customers | filter: cust | orderBy: 'name'">{{cust.name | uppercase}} works for {{cust.station | uppercase}} and lives in {{cust.city | uppercase}} </li>
-    </ul>
+<body ng-controller="MyController">
+    <h3>Using linky filter in HTML</h3>
+    <textarea ng-model="inputText" cols="50" rows="10">
+    </textarea>
+    <div ng-bind-html="inputText | linky"></div>
+    <h3>Using linky filter in JavaScript</h3>
+    <div ng-bind-html="testString"></div>
+    <!--
+    <div ng-controller="custCtrl">
 
-    <ul>
-        <li ng-repeat="cust in customers | orderBy: 'city'">{{cust | uppercase}}</li>
-    </ul>
+        <h1 ng-class="helloWorld()">My TODOs</h1>
+        <div class="dividingLine"></div>
+        <h2 ng-class="saySomethingElse()">Enter stuff with ng-model:</h2>
 
-</div>
+        <input type="text" ng-model="name">
+        <p>{{name}}</p>
+        <div ng-init="names=['Mark','Tom','Travis']"></div>
+        <h2>Looping with the ng-repeat</h2>
+        <h4>Internal list</h4>
+        <ul>
+            <li ng-repeat="personName in names">{{personName}}</li>
+        </ul>
+        <h4>External list</h4>
+        <input type="text" ng-model="cust">
+        <ul class="ulEdit">
+            <li ng-repeat="cust in customers | filter: cust | orderBy: 'name'">{{cust.name | uppercase}} works for {{cust.station | uppercase}} and lives in {{cust.city | uppercase}} </li>
+        </ul>
+
+        <ul>
+            <li ng-repeat="cust in customers | orderBy: 'city'">{{cust | uppercase}}</li>
+        </ul>
+
+    </div>
+-->
+    <script>
+        var myApp = angular.module("myApp", ['ngSanitize']);
+
+        myApp.controller("MyController", ["$scope", "$filter", function ($scope, $filter) {
+            $scope.inputText = "HI This is AngularJS Demo.We are testing linky filter.Please check my blog http://www.tutorialsavvy.com for more articles in AngularJS.you can also contact me in the following email address sandeeppateltech@gmail.com .";
+
+            $scope.testString = $filter('linky')("hi my alternate email is sandeep_giet@yahoo.com .");
+}]);
+    </script>
+</body>
+
+</html>

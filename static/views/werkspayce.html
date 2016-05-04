@@ -257,45 +257,22 @@
     </style>
 </head>
 
-<body ng-app="mainModule">
+<body ng-app="mainModule" ng-style="customOverFlow()">
 
-    <div class="row customJumbotron">
-        <div class="customJumbotronOverlay">
-            <div class="container">
-                <div class="headerheightAdjustments">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div>
-                            <h1 class="headLine">werkspayce</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <a class="ghostButton floatRight" ng-href="{{instagramDataLink}}">
-                            <center>
-                                login
-                            </center>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
+    <jumbotron></jumbotron>
 
     <div class="stickyLine"></div>
-
-    <div class="container" id="socialContainer">
+    <div class="container">
         <div class="row">
 
             <div class="col-lg-2 col-md-12">
-
                 <sidebar></sidebar>
-
             </div>
 
             <div class="col-lg-5 col-md-12">
                 <twitter></twitter>
             </div>
+
             <div class="col-lg-5 col-md-12">
                 <instagram></instagram>
             </div>
@@ -305,15 +282,17 @@
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../js/universal/parallax.js"></script>
+    <!--    <script src="../js/universal/parallax.js"></script>   -->
 
     <!-- ANGULAR IMPORTS -->
 
     <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 
     <script src="../js/main.js"></script>
     <script src="../js/controllers/alloyController.js"></script>
     <script src="../js/controllers/sidebarController.js"></script>
+    <script src="../js/directives/jumbotronDirective.js"></script>
     <script src="../js/directives/instagramDirective.js"></script>
     <script src="../js/directives/twitterDirective.js"></script>
     <script src="../js/directives/sidebarDirective.js"></script>

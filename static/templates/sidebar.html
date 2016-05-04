@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-hide="!hideThisDiv">
     <div class="row">
         <div id="leftCol">
             <ul class="nav nav-stacked" id="sidebar">
@@ -30,8 +30,6 @@
     </div>
 </div>
 
-
-
 <script>
     $(function () {
 
@@ -42,7 +40,8 @@
 
         $('#sidebar').affix({
             offset: {
-                top: stickyLinePosition
+                top: -10
+                    // top: (stickyLinePosition + 5)
             }
         });
 
