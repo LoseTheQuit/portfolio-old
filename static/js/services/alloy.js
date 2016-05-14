@@ -14,12 +14,28 @@ angular.module("mainModule")
 
 
         this.getTwitterAndInstagramDataByTags = function (params, callback) {
-            console.log("success from callApi");
+            console.log("success from getTwitterAndInstagramDataByTags");
             console.log(params);
 
             $http({
                 url: '/searchTweetsQuery',
-                method: "POST",
+                method: "GET",
+                data: params
+            })
+
+            .then(callback);
+
+            console.log('q: ' + params.q)
+
+        };
+
+        this.getSpotify = function (params, callback) {
+            console.log("success from getSpotify");
+            console.log(params);
+
+            $http({
+                url: '/spotify',
+                method: "GET",
                 data: params
             })
 

@@ -22,6 +22,7 @@
 
                         <img class="socialIconSideBar" src="../img/svg/search.svg">
                         <input class="inputBox" type="text" placeholder="#search" ng-model="inputSearchTweetsAndInstagramQuery" ng-change="getIgandTwitterApiData()">
+
                     </center>
 
                 </div>
@@ -56,8 +57,7 @@
         var instaCardWidth = $('.igCard').width();
         var tweetCardWidth = $('.cardImage').width();
 
-
-        $(window).resize(function () {
+        function sidebarResize() {
 
             instaCardWidth = $('.igCard').width();
             tweetCardWidth = $('.cardImage').width();
@@ -84,7 +84,16 @@
             console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
             console.log('\n');
 
+        }
+
+
+
+        $(window).resize(function () {
+
+            sidebarResize();
+
         });
 
+        sidebarResize();
     });
 </script>

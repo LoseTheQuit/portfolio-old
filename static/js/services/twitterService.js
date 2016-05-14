@@ -29,7 +29,7 @@ angular.module("mainModule")
             console.log(params);
 
             $http({
-                url: '/inputquery',
+                url: '/twitterinputquery',
                 method: "POST",
                 data: params
             })

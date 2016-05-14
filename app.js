@@ -8,20 +8,36 @@ let fs = require('fs'),
     https = require('https'),
     http = require('http'),
     Twitter = require('twitter'),
-    request = require('request');
+    request = require('request'),
+    Client = require('node-rest-client').Client;;
+
+var client = new Client();
 
 // swap dev/production data
 
-let client_id = "b23670e220f14f1c89c11f627c9f9953";
-let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
+//let client_id = "b23670e220f14f1c89c11f627c9f9953";
+//let client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+//let redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
 
-//let client_id = "d0f6230a40954cb2823768aa53910a5e";
-//let client_secret = "bfb29d9f5ee94a46a675f771e9013477";  
-//let redirect_uri = 'http://localhost:5000/views/werkspayce.html';
+let client_id = "d0f6230a40954cb2823768aa53910a5e";
+let client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+let redirect_uri = 'http://localhost:5000/views/werkspayce.html';
 
 // Use this to hide the client id
 //var authorize_link = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=code';
+
+//
+
+var spotify_client_id = '099060b613284cc0af0210f5199dcb0c'; // Your client id
+var spotify_client_secret = '42c98e7bfcf6426dbf25888204456dce'; // Your secret
+var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html'; // Your redirect uri
+
+var scopes = 'user-read-private user-read-email'
+
+//
+
+// https://accounts.spotify.com/authorize/?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09
+
 
 app.use(bodyParser.json());
 
@@ -61,7 +77,7 @@ app.post('/twitter', function (req, res) {
 
 });
 
-app.post('/inputquery', function (req, res) {
+app.post('/twitterinputquery', function (req, res) {
 
     console.log('INCOMING INPUT POST REQUEST - Load Template');
 
@@ -77,6 +93,9 @@ app.post('/inputquery', function (req, res) {
             console.log(error);
         }
     });
+
+
+
 
 });
 
@@ -98,6 +117,30 @@ app.post('/searchTweetsQuery', function (req, res) {
     });
 
 });
+
+
+
+app.get('/spotify', function (req, res) {
+
+
+    console.log('INCOMING INPUT GET REQUEST - SPOTIFY');
+    console.log('INCOMING INPUT GET REQUEST - SPOTIFY');
+    console.log('INCOMING INPUT GET REQUEST - SPOTIFY');
+
+    var spotifyApiUrl = 'https://accounts.spotify.com/authorize/?client_id=' + spotify_client_id + '&response_type=code&redirect_uri=' + spotify_redirect_uri + '&scope=user-read-private%20user-read-email&state=34fFs29kd09';
+
+    // direct way 
+    client.get(spotifyApiUrl, function (data, response) {
+
+        // parsed response body as js object 
+        console.log('spotifyApiUrl: ' + data);
+        // raw response 
+        console.log('spotifyApiUrl: ' + response);
+
+    });
+
+});
+
 
 app.get('/', function (req, res) {
 
@@ -274,7 +317,6 @@ function checkCodeContainer() {
 }
 
 app.post('/instaInputQuery', function (req, res, next) {
-
 
     console.log('instaInputQuery + instaInputQuery')
     console.log('instaInputQuery + instaInputQuery')
