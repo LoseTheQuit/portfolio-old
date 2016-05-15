@@ -68,16 +68,7 @@
                             <!--  <p>{{data}}</p> -->
                             <p>{{data.album_type}}</p>
 
-                            <h3>data.href</h3>
-
-                            <div>
-                                <a ng-href="{{data.href}}" class="cardLink" target="_blank">{{data.href}}</a>
-                                <div ng-repeat="hrefData in spotifyHREFData">
-                                    <p>{{hrefData}}</p>
-                                </div>
-                            </div>
-
-                            <h3>data.external_urls.spotify</h3>
+                            <h3>View Track:</h3>
 
                             <div>
                                 <a class="cardLink" ng-href='{{data.external_urls.spotify}}' target="_blank">{{data.external_urls.spotify}}</a>
