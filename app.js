@@ -15,6 +15,11 @@ let fs = require('fs'),
 
 var client = new Client();
 
+
+
+let verr = require('./ver.js');
+
+
 var twitterClient = new Twitter({
 
     consumer_key: 'qiQPf27ifq8tSBHCAqtu6iHLU',
@@ -39,7 +44,6 @@ var spotify_client_secret = '42c98e7bfcf6426dbf25888204456dce'; // Your secret
 // var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
 var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
 
-var scopes = 'user-read-private user-read-email'
 
 /**
  * Generates a random string containing numbers and letters
@@ -58,6 +62,7 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = 'spotify_auth_state';
+var scopes = 'user-read-private user-read-email'
 
 /**
  * ROUTING
@@ -68,7 +73,7 @@ var stateKey = 'spotify_auth_state';
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static('/static'))
     .use(cookieParser());
 
 app.use(bodyParser.json());
@@ -121,22 +126,19 @@ app.get('/instagram-login', function (req, res) {
 
 app.get('/spotify', function (req, res) {
 
+    console.log('START *** SPOTIFY - INCOMING INPUT GET REQUEST - SPOTIFY *** START'.black.bgCyan);
     var spotifyApiUrl = 'https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=20';
-
-    console.log('*******************************************************'.black.bgCyan);
-    console.log('SPOTIFY - INCOMING INPUT GET REQUEST - SPOTIFY');
-    console.log('THE URL: ' + spotifyApiUrl);
-    console.log('*******************************************************'.black.bgCyan);
-
-
     client.get(spotifyApiUrl, function (data, response) {
+        // console.log(data.items);
         res.send(data.items);
         res.end();
     });
 
+    console.log('END *** SPOTIFY - INCOMING INPUT GET REQUEST - SPOTIFY *** END'.black.bgCyan);
+
 });
 
-app.get('/spotify-login', function (req, res) {
+app.get('/views/werkspayce.html/spotify-login', function (req, res) {
 
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
@@ -151,22 +153,26 @@ app.get('/spotify-login', function (req, res) {
             redirect_uri: spotify_redirect_uri,
             state: state
         }));
+
     console.log('*******************************************************'.black.bgCyan);
     console.log('*******************************************************'.black.bgCyan);
+
 });
 
 app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
-    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
-    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
-    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
+    console.log('******** spotify-callback **** START **** spotify-callback ********'.black.bgCyan);
+
 
     // your application requests refresh and access tokens
     // after checking the state parameter
 
     var code = req.query.code || null;
+    console.log('code: ' + code);
     var state = req.query.state || null;
+    console.log('state: ' + state);
     var storedState = req.cookies ? req.cookies[stateKey] : null;
+    console.log('storedState: ' + storedState);
 
     if (state === null || state !== storedState) {
         res.redirect('/#' +
@@ -208,19 +214,24 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('/#' +
+                // res.redirect('/views/werkspayce.html?' +
+
+                res.redirect('http://localhost:5000/instagram-login?' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
                     }));
             } else {
-                res.redirect('/#' +
+                res.redirect('/views/werkspayce.html?' +
                     querystring.stringify({
                         error: 'invalid_token'
                     }));
             }
         });
     }
+
+    console.log('******** spotify-callback **** END **** spotify-callback ********'.black.bgCyan);
+
 });
 
 app.post('/twitter', function (req, res) {
