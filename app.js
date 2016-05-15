@@ -26,30 +26,25 @@ var twitterClient = new Twitter({
 
 // swap dev/production data
 
-//let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
-//let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-//let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
+let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
+let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
 
-let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
-let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
-let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
+//let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
+//let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+//let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
 
 var spotify_client_id = '099060b613284cc0af0210f5199dcb0c'; // Your client id
 var spotify_client_secret = '42c98e7bfcf6426dbf25888204456dce'; // Your secret
-var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html'; // Your redirect uri
+// var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
+var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
 
 var scopes = 'user-read-private user-read-email'
 
-var spotifyApiUrlVR = 'https://accounts.spotify.com/authorize/?client_id=' + spotify_client_id + '&response_type=code&redirect_uri=' + spotify_redirect_uri + '&scope=user-read-private%20user-read-email';
-
-var spotifyApiUrlVR = 'https://accounts.spotify.com/authorize?client_id=' + spotify_client_id + '&redirect_uri=' + spotify_redirect_uri + '&scope=user-read-private%20user-read-email&response_type=token&state=123'
-
-var spotifyApiUrl = 'https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=20';
-
 /**
  * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
+ * @param  {number} length The length of the string 
+ * @return {string} The generated string 
  */
 
 var generateRandomString = function (length) {
@@ -119,14 +114,15 @@ app.get('/instagram-login', function (req, res) {
 
     let devInstagramApiURL = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes'
 
-    res.redirect(devInstagramApiURL);
+    res.redirect(proInstagramApiURL);
     res.end();
 });
 
 
 app.get('/spotify', function (req, res) {
 
-    // &state=34fFs29kd09
+    var spotifyApiUrl = 'https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?album_type=SINGLE&offset=20&limit=20';
+
     console.log('*******************************************************'.black.bgCyan);
     console.log('SPOTIFY - INCOMING INPUT GET REQUEST - SPOTIFY');
     console.log('THE URL: ' + spotifyApiUrl);
@@ -144,9 +140,9 @@ app.get('/spotify-login', function (req, res) {
 
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
-
     // your application requests authorization
     var scope = 'user-read-private user-read-email';
+
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
@@ -156,17 +152,14 @@ app.get('/spotify-login', function (req, res) {
             state: state
         }));
     console.log('*******************************************************'.black.bgCyan);
-    console.log(querystring.stringify({
-        response_type: 'code',
-        client_id: spotify_client_id,
-        scope: scope,
-        redirect_uri: spotify_redirect_uri,
-        state: state
-    }));
     console.log('*******************************************************'.black.bgCyan);
 });
 
-app.get('/spotify-callback', function (req, res) {
+app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
+
+    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
+    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
+    console.log('******** spotify-callback ******** spotify-callback ********'.black.bgCyan);
 
     // your application requests refresh and access tokens
     // after checking the state parameter
@@ -186,11 +179,11 @@ app.get('/spotify-callback', function (req, res) {
             url: 'https://accounts.spotify.com/api/token',
             form: {
                 code: code,
-                redirect_uri: redirect_uri,
+                redirect_uri: spotify_redirect_uri,
                 grant_type: 'authorization_code'
             },
             headers: {
-                'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+                'Authorization': 'Basic ' + (new Buffer(spotify_client_id + ':' + spotify_client_secret).toString('base64'))
             },
             json: true
         };
@@ -309,7 +302,6 @@ app.post('/ig', function (req, res, next) {
         // START the process of making a call to the 
         // instagram api
 
-        console.log('YES');
         console.log('ACCESS_CODE: ' + req.body.token + ''.white.bgGreen);
 
         let ACCESS_CODE = req.body.token;
@@ -342,6 +334,7 @@ app.post('/ig', function (req, res, next) {
             //  console.log('*******************************************************'.black.bgRed);
 
             if (response.statusCode != 200) {
+                console.error(response.statusCode);
                 console.error('THE ERROR: ' + error);
                 console.log('ACCESS CODE NOT PRESENT');
             } else {
@@ -412,15 +405,16 @@ app.post('/ig', function (req, res, next) {
                         console.error(error);
                         return error
                     } else {
-                        var jsonobjArr = JSON.parse(body);
-                        console.log('*******************************************************'.black.bgGreen);
+                        var JSONObjectArray = JSON.parse(body);
 
                         // turns off back end logging of user info.data
+                        // console.log(JSONObjectArray);
 
-                        // console.log(jsonobjArr);
-                        console.log('*******************************************************'.black.bgGreen);
-                        //return jsonobjArr
-                        res.send(jsonobjArr);
+                        res.send(JSONObjectArray);
+
+                        console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
+                        console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
+                        console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
                     }
                 });
             }

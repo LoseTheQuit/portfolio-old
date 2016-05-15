@@ -44,11 +44,11 @@ angular.module("mainModule")
 
         };
 
-        this.getCallBackSpotify = function (params, callback) {
+        this.getAuthorizeSpotify = function (callback) {
             console.log("success from getSpotify");
 
             $http({
-                url: '/spotify-callback',
+                url: '/authorize-spotify',
                 method: "GET"
             })
 

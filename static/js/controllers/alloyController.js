@@ -92,7 +92,6 @@ angular.module("mainModule")
 
         });
 
-
         twitterService.getTwitter(function (response) {
 
             var tweets = response.data;
@@ -107,19 +106,6 @@ angular.module("mainModule")
 
             $scope.spotifyData = response.data;
             console.info(response.data);
-
-        });
-
-        alloy.getCallBackSpotify($scope.windowInfoWithToken, function (response) {
-
-            $scope.getCallBackSpotifyDATA = response.data;
-
-            console.log("_________________________________");
-            console.log("SPOTIFY response.DATA: ");
-            // console.info(response.data);
-            console.log("SPOTIFY response: ");
-            // console.info(response);
-            console.log("_________________________________");
 
         });
 
@@ -139,7 +125,6 @@ angular.module("mainModule")
 
             });
 
-
         };
 
         $scope.changeThisSearchTweets = function () {
@@ -156,8 +141,6 @@ angular.module("mainModule")
                 $scope.twitterData = tweets;
             });
 
-
         };
-
 
     });
