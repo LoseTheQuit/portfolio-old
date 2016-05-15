@@ -1,0 +1,93 @@
+<style>
+    .spotCard {
+        min-height: 305px;
+        background: #fff;
+        padding: 0px;
+        height: 100%;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
+        border: 1px solid #fff;
+        color: #fff;
+        transition: all linear .25s;
+    }
+    
+    .spotCard:hover {
+        transition: all linear .75;
+        box-shadow: 0 7px 1px rgba(0, 0, 0, .25);
+    }
+    
+    .spotImage {
+        transition: all linear 1s;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .spotImage:hover {
+        -webkit-animation: spotImageMove 50s infinite;
+        animation: spotImageMove 50s infinite;
+    }
+    
+    .spotImageOverLay {
+        width: 100%;
+        height: 100%;
+        transition: all linear .25s;
+        background: rgba(0, 0, 0, .5);
+    }
+    
+    .spotImageOverLay:hover {
+        width: 100%;
+        height: 100%;
+        transition: all linear .75s;
+        background: rgba(0, 0, 0, .25);
+    }
+</style>
+<div class="bodyWrapper" ng-hide="!hideThisDiv">
+    <!--!hideThisDiv-->
+    <div class="row">
+        <div class="col-lg-6 col-xs-12">
+            <h3>Spotify:</h3>
+        </div>
+    </div>
+
+    <div class="theWhiteLine"></div>
+    <div class="clearFloat"></div>
+
+    <div class="row">
+        <div class="spotWrapper">
+            <div class="col-md-3" ng-repeat="data in spotifyData">
+                <div class="spotCard addSomeMarginBottom">
+                    <div class="spotImage" style="background: url('{{data.images[0].url}}') no-repeat center center;  background-size: cover;">
+                        <!-- class="cardImage" -->
+                        <div class="spotImageOverLay add20pxPadding">
+                            <!-- cardImageOverLay -->
+                            <p>SPOTIFY SEARCH</p>
+                            <div ng-bind-html="inputText | linky"></div>
+                            <div class="igCardSpacer"></div>
+                            <div class="igCardHeaderMargin"></div>
+                            <!--  <p>{{data}}</p> -->
+                            <p>{{data.album_type}}</p>
+
+                            <h3>data.href</h3>
+
+                            <div>
+                                <a ng-href="{{data.href}}" class="cardLink" target="_blank">{{data.href}}</a>
+                                <div ng-repeat="hrefData in spotifyHREFData">
+                                    <p>{{hrefData}}</p>
+                                </div>
+                            </div>
+
+                            <h3>data.external_urls.spotify</h3>
+
+                            <div>
+                                <a class="cardLink" ng-href='{{data.external_urls.spotify}}' target="_blank">{{data.external_urls.spotify}}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,7 +1,115 @@
+<style>
+    .inputBox {
+        width: 50%;
+        height: 40px;
+        color: #000;
+        padding: 10px;
+        border: solid 1px rgba(0, 0, 0, .25);
+        box-shadow: inset 0 0 0 1px #707070;
+        transition: box-shadow 0.3s, border 0.3s;
+        margin-bottom: 10px;
+        vertical-align: middle;
+        /* margin: 0 auto; */
+        /* margin-top: 120px; */
+        display: inline;
+        /* float: right; */
+    }
+    
+    .inputBox:focus,
+    .inputBox input[type="text"].focus {
+        border: solid 1px rgba(0, 0, 0, .50);
+    }
+    
+    .affix-top,
+    .affix {
+        position: static;
+    }
+    
+    .sidebar {
+        background: rgba(0, 0, 0, .5);
+        border: 1px solid #fff;
+        width: 100%;
+        height: 90%;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+        transition: all linear .25s;
+    }
+    
+    .sidebar:hover {
+        transition: all linear .75s;
+        box-shadow: 0 7px 1px rgba(0, 0, 0, .25);
+    }
+    
+    @media (min-width: 990px) {
+        .sidebar.affix-top {
+            position: static;
+            /*   margin-top: 30px;  */
+            width: 228px;
+        }
+        .sidebar.affix {
+            position: fixed;
+            top: 5%;
+            width: 228px;
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .sidebar.affix-top {
+            position: relative;
+            margin-top: 30px;
+            width: 100%;
+        }
+        .sidebar.affix {
+            position: relative;
+            top: 5%;
+            width: 100%;
+            margin-top: 50px;
+        }
+    }
+    
+    .beaker {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .displayFlex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .socialIconSideBar {
+        width: 15%;
+        margin: 15px;
+        /* margin-top: 120px; */
+    }
+    
+    .sideBarGhostButton {
+        width: 80%;
+        height: 50px;
+        cursor: pointer;
+        line-height: 50px;
+        display: block;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
+    }
+    
+    .sideBarGhostButton:hover {
+        text-decoration: none;
+        color: #fff;
+        transition: all linear .50s;
+        background: rgba(0, 0, 0, .5);
+    }
+</style>
+
 <div class="container" ng-hide="!hideThisDiv">
     <div class="row">
         <div id="leftCol">
-            <ul class="nav nav-stacked" id="sidebar">
+            <ul class="nav nav-stacked sidebar" id="sidebar">
                 <div class="beaker displayFlex">
 
                     <!--
@@ -9,20 +117,34 @@
                         <img class="socialIconSideBar" src="../img/svg/twitter.svg">
                         <input class="inputBox" type="text" placeholder="Twitter" ng-model="inputQuery" ng-change="changeThis()">
                     </center>
--->
-                    <!--
+                    -->
 
+                    <!--
                     <center>
                         <img class="socialIconSideBar" src="../img/svg/default-icon.svg">
                         <input class="inputBox" type="text" placeholder="Search Tweets" ng-model="inputSearchTweetsQuery" ng-change="changeThisSearchTweets()" ng-click="goCats = !goCats">
                     </center>
--->
+                    -->
 
                     <center>
 
                         <img class="socialIconSideBar" src="../img/svg/search.svg">
                         <input class="inputBox" type="text" placeholder="#search" ng-model="inputSearchTweetsAndInstagramQuery" ng-change="getIgandTwitterApiData()">
 
+                    </center>
+                    <center>
+                        <a class="sideBarGhostButton" ng-href="http://localhost:5000/spotify-login">
+                            <center>
+                                spotify login
+                            </center>
+                        </a>
+                    </center>
+                    <center>
+                        <a class="sideBarGhostButton" ng-href="http://localhost:5000/spotify-callback">
+                            <center>
+                                spotify auth
+                            </center>
+                        </a>
                     </center>
 
                 </div>
@@ -39,10 +161,9 @@
 
         console.log(stickyLinePosition)
 
-        $('#sidebar').affix({
+        $('.sidebar').affix({
             offset: {
                 top: -10
-                    // top: (stickyLinePosition + 5)
             }
         });
 
@@ -62,31 +183,39 @@
             instaCardWidth = $('.igCard').width();
             tweetCardWidth = $('.cardImage').width();
 
+            var tweetCardShellPaddingRight = parseInt($('.tweetCardShell').css('padding-right').replace('px', ''));
+            var tweetCardShellPaddingLeft = parseInt($('.tweetCardShell').css('padding-left').replace('px', ''));
+
             if (($(window).width() + 17) > 1200) {
 
-                $('#sidebar').css('position', 'fixed');
+                $('.sidebar').css('position', 'fixed');
 
                 if (tweetCardWidth <= 101)
-                    $('#sidebar').css('width', 300 - 75);
+                    $('.sidebar').css('width', 300 - 75);
                 else
-                    $('#sidebar').css('width', tweetCardWidth - 75);
+                    $('.sidebar').css('width', tweetCardWidth - ((tweetCardShellPaddingRight + tweetCardShellPaddingLeft) * 2));
 
             } else {
-                $('#sidebar').css('position', 'relative');
-                $('#sidebar').css('width', '100%');
+
+                $('.sidebar').css('position', 'relative');
+                $('.sidebar').css('width', '100%');
+
             }
 
             console.log('\n');
             console.log('WINDA: ' + ($(window).width() + 17));
             console.log('INSTA: ' + instaCardWidth);
             console.log('TWEET: ' + tweetCardWidth);
-            console.log('SIDEBAR: ' + $('#sidebar').width());
+            console.log('SIDEBAR: ' + $('.sidebar').width());
             console.log('THE DIFF: ' + (tweetCardWidth - instaCardWidth));
+            console.log('tweetCardShellMARGIN: ' + (tweetCardShellPaddingRight + tweetCardShellPaddingLeft));
             console.log('\n');
 
         }
 
-
+        setInterval(function () {
+            sidebarResize();
+        }, 500);
 
         $(window).resize(function () {
 
@@ -94,6 +223,5 @@
 
         });
 
-        sidebarResize();
     });
 </script>

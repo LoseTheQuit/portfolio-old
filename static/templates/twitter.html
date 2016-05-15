@@ -1,19 +1,25 @@
 <style>
-    .tweetCard {
-        min-height: 305px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
-        color: #fff;
-        height: 100%;
-        width: 100%;
-        border: 1px solid #fff;
-        background-size: cover;
-        background: rgba(0, 0, 0, .5);
-    }
-    
     .tweetCardSpacer {
         margin-bottom: 100px;
         padding-bottom: 100px;
+    }
+    
+    .tweetCard {
+        min-height: 305px;
+        background: #fff;
+        padding: 0px;
+        height: 100%;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
+        border: 1px solid #fff;
+        color: #fff;
+        transition: all linear .25s;
+    }
+    
+    .tweetCard:hover {
+        transition: all linear .75;
+        box-shadow: 0 7px 1px rgba(0, 0, 0, .25);
     }
 </style>
 
@@ -28,7 +34,7 @@
     <div class="clearFloat"></div>
 
     <div class="row">
-        <div class="col-md-6 col-xs-12" ng-repeat="tweet in twitterData.data">
+        <div class="col-md-6 col-xs-12 tweetCardShell" ng-repeat="tweet in twitterData.data">
             <div class="tweetCard addSomeMarginBottom">
                 <div class="cardImage" style="background: url(&quot;{{tweet.user.profile_background_image_url}}&quot;); background-size: cover;">
                     <!-- cardImage-->
@@ -59,7 +65,7 @@
 
 
     <div class="row">
-        <div class="col-md-6 col-xs-12" ng-repeat="tweet in twitterData.statuses">
+        <div class="col-md-6 col-xs-12 tweetCardShell" ng-repeat="tweet in twitterData.statuses">
             <div class="tweetCard addSomeMarginBottom">
                 <div class="cardImage" style="background: url(&quot;{{tweet.user.profile_background_image_url}}&quot;); background-size: cover;">
                     <!--                    cardImage-->
@@ -87,7 +93,7 @@
                         <p>{{tweet.text}}</p>
                         <p>Retweet count: {{tweet.retweet_count}}</p>
                         <p>{{tweet.created_at}}</p>
-                        <a class="cardLink" ng-href="{{tweets.user.url}" target="_blank">{{tweet.user.url}}</a>
+                        <a class="cardLink" ng-href={{tweet.user.url}} target="_blank">{{tweet.user.url}}</a>
 
                     </div>
                 </div>

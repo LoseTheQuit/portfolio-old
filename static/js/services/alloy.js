@@ -18,8 +18,8 @@ angular.module("mainModule")
             console.log(params);
 
             $http({
-                url: '/searchTweetsQuery',
-                method: "GET",
+                url: '/searchTwitterQuery',
+                method: "POST",
                 data: params
             })
 
@@ -35,8 +35,7 @@ angular.module("mainModule")
 
             $http({
                 url: '/spotify',
-                method: "GET",
-                data: params
+                method: "GET"
             })
 
             .then(callback);
@@ -45,5 +44,16 @@ angular.module("mainModule")
 
         };
 
+        this.getCallBackSpotify = function (params, callback) {
+            console.log("success from getSpotify");
+
+            $http({
+                url: '/spotify-callback',
+                method: "GET"
+            })
+
+            .then(callback);
+
+        };
 
     });

@@ -7,10 +7,6 @@ angular.module("mainModule")
 
         console.log("INSIDE alloyController");
 
-        // $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=b23670e220f14f1c89c11f627c9f9953&redirect_uri=https://losethequit.herokuapp.com/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
-
-        $scope.instagramDataLink = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes';
-
         $scope.windowInfoWithToken = instagramService.getWindowInfo();
 
         $scope.getIgandTwitterApiData = function () {
@@ -34,9 +30,22 @@ angular.module("mainModule")
                 $scope.twitterData = tweets;
             });
 
-        };
+            alloy.getSpotify($scope.windowInfoWithToken, function (response) {
 
-        // $scope.testString = $filter('linky')("hi my alternate email is sandeep_giet@yahoo.com .");
+                $scope.spotifyData = response.data;
+                $scope.spotifyHREFData = response.data.href;
+
+                console.log("_________________________________");
+                console.log("SPOTIFY response.DATA: ");
+                console.info(response.data);
+                console.log("SPOTIFY response: ");
+                console.info(response);
+                console.log("_________________________________");
+
+            });
+
+
+        };
 
         $scope.tagQuery = function (instaQuery) {
 
@@ -90,15 +99,27 @@ angular.module("mainModule")
             console.log(tweets);
             console.log($scope.hideThisDiv);
             $scope.twitterData = {};
-            $scope.twitterData.data = tweets
+            $scope.twitterData.data = tweets;
 
         });
 
         alloy.getSpotify($scope.windowInfoWithToken, function (response) {
 
             $scope.spotifyData = response.data;
-
             console.info(response.data);
+
+        });
+
+        alloy.getCallBackSpotify($scope.windowInfoWithToken, function (response) {
+
+            $scope.getCallBackSpotifyDATA = response.data;
+
+            console.log("_________________________________");
+            console.log("SPOTIFY response.DATA: ");
+            // console.info(response.data);
+            console.log("SPOTIFY response: ");
+            // console.info(response);
+            console.log("_________________________________");
 
         });
 

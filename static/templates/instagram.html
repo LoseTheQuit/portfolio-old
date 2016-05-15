@@ -41,15 +41,16 @@
         padding: 0px;
         height: 100%;
         text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
         background: rgba(0, 0, 0, .5);
         border: 1px solid #fff;
         color: #fff;
+        transition: all linear .25s;
     }
     
     .igCard:hover {
-        transition: all linear .50s;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+        transition: all linear .75;
+        box-shadow: 0 7px 1px rgba(0, 0, 0, .25);
     }
     
     .injectedImage {
@@ -145,7 +146,7 @@
     <div class="clearFloat"></div>
 
     <div class="row">
-        <div class="col-md-6" ng-repeat="data in instagramData.data">
+        <div class="col-md-6 igCardShell" ng-repeat="data in instagramData.data">
             <div class="igCard addSomeMarginBottom">
                 <div class="cardImage" style="background: url('{{data.images.low_resolution.url}}') no-repeat center center;  background-size: cover;">
                     <div class="cardImageOverLay add20pxPadding">
