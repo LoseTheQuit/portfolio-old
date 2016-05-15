@@ -52,13 +52,13 @@ angular.module("mainModule")
         this.getWindowInfo = function () {
 
             var windowLocation = window.location.href;
-            var windowLocationWithToken = '';
 
             if (windowLocation.indexOf("losethequit") != -1) {
-                windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
+                var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
             } else {
-                windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
+                var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
             }
+            var windowLocationWithToken = windowLocation.replace("https://losethequit.herokuapp.com/views/werkspayce.html?code=", "");
 
             return windowLocationWithToken;
 
