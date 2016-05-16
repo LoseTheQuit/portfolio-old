@@ -29,18 +29,18 @@ var twitterClient = new Twitter({
 
 // swap dev/production data
 
-//let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
-//let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-//let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
+let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
+let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
 
-let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
-let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
-let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
+//let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
+//let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+//let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
 
 var spotify_client_id = '099060b613284cc0af0210f5199dcb0c'; // Your client id
 var spotify_client_secret = '42c98e7bfcf6426dbf25888204456dce'; // Your secret
-var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
-// var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
+//  var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
+var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
 
 
 /**
@@ -197,8 +197,7 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
                 console.log('\n');
                 console.log('SPOTIFY ACCESS TOKEN:'.white.bgCyan);
-                console.log('\n');
-
+                // console.log('\n');
                 console.log(spotifyAccessToken);
                 console.log('SPOTIFY ACCESS TOKEN:'.white.bgCyan);
                 console.log('\n');
@@ -231,9 +230,10 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
                         error: 'invalid_token'
                     }));
             }
+            console.log('END ******* spotify-callback *** spotify-callback ******* END'.black.bgCyan);
         });
     }
-    console.log('END ******* spotify-callback *** spotify-callback ******* END'.black.bgCyan);
+
 });
 
 app.post('/spotify-input-query', function (req, res) {
@@ -307,9 +307,7 @@ app.post('/searchTwitterQuery', function (req, res) {
 
     console.log('\n');
     console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
-    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
     console.log(req.body);
-    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
     console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
     console.log('\n');
 
@@ -317,13 +315,16 @@ app.post('/searchTwitterQuery', function (req, res) {
 
         if (!error) {
             //console.log(tweets);
+            console.log('***** tweets *** SENT *** tweets *****'.white.bgBlue);
             res.json(tweets);
         } else {
             res.json(error);
             console.log(error);
         }
+        console.log('\n');
+        console.log('TWITTER - INPUTQUERY - END - TWITTER'.white.bgBlue);
     });
-    console.log('TWITTER - INPUTQUERY - END - TWITTER'.white.bgBlue);
+
 });
 
 app.get('/instagram-login', function (req, res) {
@@ -332,7 +333,7 @@ app.get('/instagram-login', function (req, res) {
 
     let devInstagramApiURL = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes'
 
-    res.redirect(devInstagramApiURL);
+    res.redirect(proInstagramApiURL);
     res.end();
 
 });
@@ -354,9 +355,6 @@ app.post('/ig', function (req, res, next) {
         // if the access code IS available
         // START the process of making a call to the 
         // instagram api
-
-        console.log('\n');
-        console.log('INSTAGRAM ACCESS CODE: '.white.bgGreen + req.body.token);
 
         let ACCESS_CODE = req.body.token;
 
@@ -383,14 +381,15 @@ app.post('/ig', function (req, res, next) {
         request(post_options, function (error, response, body) {
 
             var parsedBody = JSON.parse(body);
+
             //  console.log('*******************************************************'.black.bgRed);
             //  console.log(parsedBody); 
             //  console.log('*******************************************************'.black.bgRed);
 
             if (response.statusCode != 200) {
-                console.error(response.statusCode);
-                console.error('THE ERROR: ' + error);
+
                 console.log('ACCESS CODE NOT PRESENT');
+
             } else {
 
                 instagramAccessCode = parsedBody.access_token;
@@ -461,39 +460,31 @@ app.post('/ig', function (req, res, next) {
                         return error
                     } else {
                         var JSONObjectArray = JSON.parse(body);
-
-                        // turns off back end logging of user info.data
+                        // turns off back end logging of user JSONObjectArray
                         // console.log(JSONObjectArray);
 
                         res.send(JSONObjectArray);
 
                         console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
-                        console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
-                        console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
+                        console.log('\n');
+                        console.log('END ******* - IG INCOMING POST REQUEST - IG ******* END'.black.bgGreen);
                     }
                 });
             }
         });
     }
-});
 
+});
 
 app.post('/instaInputQuery', function (req, res, next) {
 
-    console.log('instaInputQuery + instaInputQuery')
     console.log('\n');
-    console.log('*******************************************************'.black.bgGreen);
-    console.log('ACCESS_CODE: ' + req.body.token);
-    console.log('INPUT_QUERY: ' + req.body.query);
-
-    console.log('INPUT_QUERY TYPEOF: ' + typeof req.body.query);
+    console.log('START - *** - IG - InputQuery - IG - *** - START'.black.bgGreen);
+    console.log(req.body);
 
 
     let inputQueryFromHTML = req.body.query;
 
-    console.log('ACCESS_TOKEN FROM VAR: ' + instagramAccessCode);
-    console.log('ACCESS_TOKEN FROM VAR: ' + instagramAccessCode);
-    console.log('ACCESS_TOKEN FROM VAR: ' + instagramAccessCode);
 
     var from_the_docs = {
         url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + instagramAccessCode,
@@ -552,14 +543,17 @@ app.post('/instaInputQuery', function (req, res, next) {
 
         if (error || response.statusCode != 200) {
             error = error || response;
-            console.error(response.body);
+            // console.error(response.body);
             res.send(response.body);
         } else {
             var JSONobjArray = JSON.parse(body);
-            console.log('*******************************************************'.black.bgGreen);
-            // console.log(JSONobjArray);
-            console.log('*******************************************************'.black.bgGreen);
+            // turns off back end logging of user JSONObjectArray
+            // console.log(JSONObjectArray);
+
             res.send(JSONobjArray);
+            console.log('***** JSONObjectArray *** SENT *** JSONObjectArray *****'.black.bgGreen);
+            console.log('\n');
+            console.log('END - *** - IG - InputQuery - IG - *** - END'.black.bgGreen);
         }
 
     });
