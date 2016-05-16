@@ -58,7 +58,7 @@ angular.module("mainModule")
             } else {
                 var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
             }
-            /////////////////////
+            ///////////////////// 
             return windowLocationWithToken;
 
         };
