@@ -24,21 +24,4 @@ angular.module("mainModule")
 
         };
 
-        this.getTwitterExtended = function (params, callback) {
-            console.log("success from callApi");
-            console.log(params);
-
-            $http({
-                url: '/twitterinputquery',
-                method: "POST",
-                data: params
-            })
-
-            .then(callback);
-
-            console.log('sn: ' + params.screen_name)
-
-        };
-
-
     });

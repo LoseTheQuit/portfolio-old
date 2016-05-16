@@ -30,10 +30,14 @@ angular.module("mainModule")
                 $scope.twitterData = tweets;
             });
 
-            alloy.getSpotify($scope.windowInfoWithToken, function (response) {
+            alloy.getSpotifyDATA({
+
+                q: $scope.inputSearchTweetsAndInstagramQuery,
+                count: 20
+
+            }, function (response) {
 
                 $scope.spotifyData = response.data;
-                $scope.spotifyHREFData = response.data.href;
 
                 console.log("_________________________________");
                 console.log("SPOTIFY response.DATA: ");
@@ -105,7 +109,10 @@ angular.module("mainModule")
         alloy.getSpotify($scope.windowInfoWithToken, function (response) {
 
             $scope.spotifyData = response.data;
+            console.info('getSPOTIFY: ');
             console.info(response.data);
+            console.info('getSPOTIFY: ');
+
 
         });
 

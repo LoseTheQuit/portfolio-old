@@ -56,4 +56,21 @@ angular.module("mainModule")
 
         };
 
+
+        this.getSpotifyDATA = function (params, callback) {
+            console.log("success from getSpotify");
+            console.log(params);
+
+            $http({
+                url: '/spotify-input-query',
+                method: "POST",
+                data: params
+            })
+
+            .then(callback);
+
+            console.log('q: ' + params.q)
+
+        };
+
     });

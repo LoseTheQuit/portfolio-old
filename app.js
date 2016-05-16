@@ -15,11 +15,6 @@ let fs = require('fs'),
 
 var client = new Client();
 
-
-
-let verr = require('./ver.js');
-
-
 var twitterClient = new Twitter({
 
     consumer_key: 'qiQPf27ifq8tSBHCAqtu6iHLU',
@@ -31,18 +26,18 @@ var twitterClient = new Twitter({
 
 // swap dev/production data
 
-let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
-let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
-let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
+//let instagram_client_id = "b23670e220f14f1c89c11f627c9f9953";
+//let instagram_client_secret = "dd78c7ffbadd4a10a49f24675356c4d2";
+//let instagram_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html';
 
-//let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
-//let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
-//let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
+let instagram_client_id = "d0f6230a40954cb2823768aa53910a5e";
+let instagram_client_secret = "bfb29d9f5ee94a46a675f771e9013477";
+let instagram_redirect_uri = 'http://localhost:5000/views/werkspayce.html';
 
 var spotify_client_id = '099060b613284cc0af0210f5199dcb0c'; // Your client id
 var spotify_client_secret = '42c98e7bfcf6426dbf25888204456dce'; // Your secret
-// var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
-var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
+var spotify_redirect_uri = 'http://localhost:5000/views/werkspayce.html/spotify-callback'; // Your redirect uri
+// var spotify_redirect_uri = 'https://losethequit.herokuapp.com/views/werkspayce.html/spotify-callback'; // Your redirect uri
 
 
 /**
@@ -119,7 +114,7 @@ app.get('/instagram-login', function (req, res) {
 
     let devInstagramApiURL = 'http://www.instagram.com/oauth/authorize?client_id=d0f6230a40954cb2823768aa53910a5e&redirect_uri=http://localhost:5000/views/werkspayce.html&response_type=code&scope=basic+public_content+follower_list+comments+relationships+likes'
 
-    res.redirect(proInstagramApiURL);
+    res.redirect(devInstagramApiURL);
     res.end();
 });
 
@@ -159,6 +154,9 @@ app.get('/views/werkspayce.html/spotify-login', function (req, res) {
 
 });
 
+
+var spotify_access_token = 'FOR-TEMPORARY-USE-ONLY';
+
 app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
     console.log('******** spotify-callback **** START **** spotify-callback ********'.black.bgCyan);
@@ -169,6 +167,8 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
     var code = req.query.code || null;
     console.log('code: ' + code);
+
+    console.log('\n');
     var state = req.query.state || null;
     console.log('state: ' + state);
     var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -199,9 +199,15 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
                 var access_token = body.access_token,
                     refresh_token = body.refresh_token;
+                spotify_access_token = access_token;
+
+                console.log('\n');
+                console.log('ACCESS TOKEN: '.white.bgCyan + spotify_access_token.white.bgCyan);
+                console.log('\n');
 
                 var options = {
-                    url: 'https://api.spotify.com/v1/me',
+                    //                    url: 'https://api.spotify.com/v1/me',
+                    url: 'https://api.spotify.com/v1/search?q=tania%20bowra&type=artist',
                     headers: {
                         'Authorization': 'Bearer ' + access_token
                     },
@@ -216,7 +222,7 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
                 // we can also pass the token to the browser to make requests from there
                 // res.redirect('/views/werkspayce.html?' +
 
-                res.redirect('/instagram-login?' +
+                res.redirect('http://localhost:5000/instagram-login?' +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
@@ -233,6 +239,51 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
     console.log('******** spotify-callback **** END **** spotify-callback ********'.black.bgCyan);
 
 });
+
+app.post('/spotify-input-query', function (req, res) {
+
+    console.log('START *** INSIDE spotify-input-query INSIDE ***'.black.bgCyan);
+    console.log('\n');
+    console.log('START *** INSIDE spotify-input-query -TEXT - INSIDE ***'.black.bgCyan);
+    // req.body seems to only work with POST requests
+    console.log(req.body);
+    console.log('START *** INSIDE spotify-input-query -TEXT - INSIDE ***'.black.bgCyan);
+
+    var options = {
+        // url: 'https://api.spotify.com/v1/me',
+        url: 'https://api.spotify.com/v1/search?q=' + req.body.q + '&type=artist',
+        headers: {
+            'Authorization': 'Bearer ' + spotify_access_token
+        },
+        json: true
+    };
+
+    // use the access token to access the Spotify Web API
+    request.get(options, function (error, response, body) {
+
+        if (response.statusCode === 200) {
+            //        console.log(body.artists);
+            //        console.log(body.artists.items);
+
+            //                for (var key in response) {
+            //                    console.log("KEY: " + key)
+            //                }
+            //
+            //        for (var key in body.artists) {
+            //            console.log("KEY: " + key)
+            //        }
+            res.send(body.artists.items);
+        } else {
+            console.log(response.body)
+        }
+    });
+
+    console.log('\n');
+    console.log('END *** INSIDE spotify-input-query INSIDE ***'.black.bgCyan);
+
+});
+
+
 
 app.post('/twitter', function (req, res) {
 
@@ -255,30 +306,16 @@ app.post('/twitter', function (req, res) {
 
 });
 
-app.post('/twitterinputquery', function (req, res) {
-
-    console.log('INCOMING INPUT POST REQUEST - Load Template');
-
-    console.log(req.body);
-
-    twitterClient.get('statuses/user_timeline', req.body, function (error, tweets, response) {
-
-        if (!error) {
-            //console.log(tweets);
-            res.json(tweets);
-        } else {
-            res.json(error);
-            console.log(error);
-        }
-    });
-
-});
-
 app.post('/searchTwitterQuery', function (req, res) {
+    console.log('TWITTER - INPUTQUERY - START - TWITTER'.white.bgBlue);
 
-    console.log('INCOMING INPUT GET REQUEST - search-tweets-query');
-
+    console.log('\n');
+    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
+    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
     console.log(req.body);
+    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
+    console.log('INCOMING INPUT GET REQUEST - search-tweets-query'.white.bgBlue);
+    console.log('\n');
 
     twitterClient.get('search/tweets', req.body, function (error, tweets, response) {
 
@@ -290,7 +327,7 @@ app.post('/searchTwitterQuery', function (req, res) {
             console.log(error);
         }
     });
-
+    console.log('TWITTER - INPUTQUERY - END - TWITTER'.white.bgBlue);
 });
 
 var tokenContainer = [];
@@ -518,8 +555,8 @@ app.post('/instaInputQuery', function (req, res, next) {
 
         if (error || response.statusCode != 200) {
             error = error || response;
-            console.error(error);
-            res.send(error);
+            console.error(response.body);
+            res.send(response.body);
         } else {
             var JSONobjArray = JSON.parse(body);
             console.log('*******************************************************'.black.bgGreen);
