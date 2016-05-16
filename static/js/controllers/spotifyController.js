@@ -3,6 +3,6 @@
 console.log("OUTSIDE sidebarController");
 
 angular.module("mainModule")
-    .controller('sidebarController', function ($scope, instagramService, twitterService, alloy) {
+    .controller('spotifyController', function ($scope, instagramService, twitterService, alloy) {
         console.log("INSIDE sidebarController");
     });

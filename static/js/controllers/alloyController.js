@@ -48,7 +48,6 @@ angular.module("mainModule")
 
             });
 
-
         };
 
         $scope.tagQuery = function (instaQuery) {
@@ -78,43 +77,6 @@ angular.module("mainModule")
 
             }
         }
-
-        instagramService.tapInsta($scope.windowInfoWithToken, function (response) {
-
-            $scope.instagramData = response.data;
-
-            if (!response.data.access_token == undefined) {
-
-                $scope.instagramDataWithToken = response.data.access_token;
-
-            } else {
-
-                $scope.hideThisDiv = true;
-            }
-
-            console.info(response.data);
-
-        });
-
-        twitterService.getTwitter(function (response) {
-
-            var tweets = response.data;
-            console.log(tweets);
-            console.log($scope.hideThisDiv);
-            $scope.twitterData = {};
-            $scope.twitterData.data = tweets;
-
-        });
-
-        alloy.getSpotify($scope.windowInfoWithToken, function (response) {
-
-            $scope.spotifyData = response.data;
-            console.info('getSPOTIFY: ');
-            console.info(response.data);
-            console.info('getSPOTIFY: ');
-
-
-        });
 
         $scope.changeThis = function () {
 
@@ -149,5 +111,45 @@ angular.module("mainModule")
             });
 
         };
+
+
+        twitterService.getTwitter(function (response) {
+
+            var tweets = response.data;
+            console.log(tweets);
+            console.log($scope.hideThisDiv);
+            $scope.twitterData = {};
+            $scope.twitterData.data = tweets;
+
+        });
+
+        alloy.getSpotify($scope.windowInfoWithToken, function (response) {
+
+            $scope.spotifyData = response.data;
+            console.info('getSPOTIFY: ');
+            console.info(response.data);
+            console.info('getSPOTIFY: ');
+
+
+        });
+
+        instagramService.tapInsta($scope.windowInfoWithToken, function (response) {
+
+            $scope.instagramData = response.data;
+
+            // debugger;
+
+            if (!response.data.access_token == undefined) {
+
+                $scope.instagramDataWithToken = response.data.access_token;
+
+            } else {
+                $scope.hideThisDiv = true;
+            }
+
+            console.info(response.data);
+
+        });
+
 
     });

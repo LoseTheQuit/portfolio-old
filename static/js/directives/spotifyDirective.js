@@ -1,16 +1,15 @@
 'use strict';
 
-console.log("outer spotify directive");
+console.log("OUTSIDE spotify directive");
 
 angular.module("mainModule")
     .directive('spotify', function () {
 
-        console.log("spotify directive initialized!");
+        console.log("INSIDE spotify directive");
 
         return {
-
             templateUrl: '../templates/spotify.html',
-            controller: 'alloyController',
+            controller: 'spotifyController',
             replace: false
         }
 

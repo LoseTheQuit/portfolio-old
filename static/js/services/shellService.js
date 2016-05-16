@@ -1,15 +1,10 @@
 'use strict';
 
-console.log("this is the shellServiceData");
+console.log("OUTSIDE shellServiceData");
 
 angular.module("shell")
     .service('dataService', function ($http) {
-        console.log("shellServiceData initialized!");
-        this.helloConsole = function () {
-
-            console.info("This is inside the dataService method - service method");
-
-        };
+        console.info("INSIDE dataService");
 
         this.getTodos = function (callback) {
 

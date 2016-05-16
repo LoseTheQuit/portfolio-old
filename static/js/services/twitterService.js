@@ -1,12 +1,11 @@
 'use strict';
 
-console.log("outer mashupServiceData");
+console.log("OUTSIDE twitterService");
 
-//angular.module("shell")
 angular.module("mainModule")
     .service('twitterService', function ($http) {
 
-        console.log("mashupServiceData initialized!");
+        console.log("INSIDE twitterService");
 
         this.getTwitter = function (callback) {
 

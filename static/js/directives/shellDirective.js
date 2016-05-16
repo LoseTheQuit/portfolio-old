@@ -6,7 +6,6 @@ angular.module("shell")
     console.log("portfolio directive initialized!");
     return {
         templateUrl: '../templates/portfolio.html',
-        controller: 'sidebarController',
         replace: false
     }
 

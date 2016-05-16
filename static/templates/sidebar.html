@@ -152,7 +152,7 @@
         var stickyLine = document.querySelector('.stickyLine');
         var stickyLinePosition = stickyLine.getBoundingClientRect().top;
 
-        console.log(stickyLinePosition)
+        // console.log(stickyLinePosition)
 
         $('.sidebar').affix({
             offset: {
@@ -176,8 +176,16 @@
             instaCardWidth = $('.igCard').width();
             tweetCardWidth = $('.cardImage').width();
 
-            var tweetCardShellPaddingRight = parseInt($('.tweetCardShell').css('padding-right').replace('px', ''));
-            var tweetCardShellPaddingLeft = parseInt($('.tweetCardShell').css('padding-left').replace('px', ''));
+
+            if ($('.tweetCardShell').css('padding-right') !== undefined) {
+
+                var tweetCardShellPaddingRight = parseInt($('.tweetCardShell').css('padding-right').replace('px', '')) || null;
+                var tweetCardShellPaddingLeft = parseInt($('.tweetCardShell').css('padding-left').replace('px', '')) || null;
+            }
+
+            var tweetCardShellPaddingRight = parseInt($('.tweetCardShell').css('padding-right').replace('px', '')) || null;
+            var tweetCardShellPaddingLeft = parseInt($('.tweetCardShell').css('padding-left').replace('px', '')) || null;
+
 
             if (($(window).width() + 17) > 1200) {
 

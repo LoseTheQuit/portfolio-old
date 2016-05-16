@@ -1,16 +1,16 @@
 'use strict';
 
-console.log("outer mashup directive");
+console.log("OUTSIDE twitter directive");
 
 angular.module("mainModule")
     .directive('twitter', function () {
 
-        console.log("mashup directive initialized!");
+        console.log("INSIDE twitter directive");
 
         return {
 
             templateUrl: '../templates/twitter.html',
-            controller: 'alloyController',
+            controller: 'twitterController',
             replace: false
         }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-console.log("this is the shellServiceData");
+console.log("OUTSIDE alloy");
 
 angular.module("mainModule")
     .service('alloy', function ($http) {
@@ -8,7 +8,7 @@ angular.module("mainModule")
 
         this.helloConsole = function () {
 
-            console.info("This is inside the dataService method - service method");
+            console.info("INSIDE alloy");
 
         };
 

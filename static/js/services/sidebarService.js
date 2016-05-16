@@ -1,10 +1,10 @@
 'use strict';
 
-console.log("this is the sideBarService");
+console.log("INSIDE sideBarService");
 
 angular.module("mainModule")
     .service('sideBarService', function ($http) {
-        console.log("sideBarService initialized!");
+        console.log("INSIDE sideBarService");
 
 
     });
