@@ -50,7 +50,7 @@ angular.module("mainModule")
         }
 
         this.getWindowInfo = function () {
-
+            /////////////////////
             var windowLocation = window.location.href;
 
             if (windowLocation.indexOf("losethequit") != -1) {
@@ -58,7 +58,7 @@ angular.module("mainModule")
             } else {
                 var windowLocationWithToken = windowLocation.replace("http://localhost:5000/views/werkspayce.html?code=", "");
             }
-
+            /////////////////////
             return windowLocationWithToken;
 
         };
