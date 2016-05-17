@@ -85,7 +85,7 @@
     
     .sideBarGhostButton {
         width: 80%;
-        height: 50px;
+        height: 100%;
         cursor: pointer;
         line-height: 50px;
         display: block;
@@ -104,6 +104,75 @@
         transition: all linear .50s;
         background: rgba(0, 0, 0, .5);
     }
+    /*--***** DROPDOWN STYLES *****--*/
+    /*--***** DROPDOWN STYLES *****--*/
+    /*--***** DROPDOWN STYLES *****--*/
+    /*--***** DROPDOWN STYLES *****--*/
+    /*--***** DROPDOWN STYLES *****--*/
+    /* Dropdown Button */
+    
+    .custom-dropdown {
+        background-color: #192f42;
+        color: #ffffff;
+        border-radius: 0;
+        min-height: auto;
+        /*        */
+        width: 80%;
+        height: 50px;
+        cursor: pointer;
+        line-height: 50px;
+        display: block;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
+    }
+    
+    .custom-dropdown a {
+        color: rgba(255, 255, 255, .95);
+    }
+    
+    .custom-dropdown > li > a {
+        color: #fff;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .custom-dropdown > .active > a,
+    .custom-dropdown > .active > a:hover,
+    .custom-dropdown > .active > a:focus {
+        color: #ffffff;
+        background-color: red;
+    }
+    
+    .custom-dropdown a:hover,
+    .custom-dropdown a:focus {
+        text-decoration: none;
+    }
+    
+    .custom-dropdown .navbar-toggle,
+    .custom-dropdown .open>a,
+    .custom-dropdown .open>a:hover,
+    .custom-dropdown .open>a:focus {
+        color: rgba(255, 255, 255, .95);
+        background-color: transparent;
+        text-decoration: none;
+    }
+    
+    .custom-dropdown .icon-bar {
+        border: 1px solid #fff;
+    }
+    /*-- change navbar dropdown color --*/
+    
+    .custom-dropdown .open .dropdown-menu>li>a,
+    .custom-dropdown .open .dropdown-menu {
+        color: #428bca;
+    }
 </style>
 
 <div class="container" ng-hide="!hideThisDiv">
@@ -112,25 +181,35 @@
             <ul class="nav nav-stacked sidebar" id="sidebar">
                 <div class="beaker displayFlex">
 
-                    <!--
-                    <center>
-                        <img class="socialIconSideBar" src="../img/svg/twitter.svg">
-                        <input class="inputBox" type="text" placeholder="Twitter" ng-model="inputQuery" ng-change="changeThis()">
-                    </center>
-                    -->
-
-                    <!-- 
-                    <center>
-                        <img class="socialIconSideBar" src="../img/svg/default-icon.svg">
-                        <input class="inputBox" type="text" placeholder="Search Tweets" ng-model="inputSearchTweetsQuery" ng-change="changeThisSearchTweets()" ng-click="goCats = !goCats">
-                    </center>
-                    -->
                     <center>
 
                         <img class="socialIconSideBar" src="../img/svg/search.svg">
                         <input class="inputBox" type="text" placeholder="#search" ng-model="inputSearchTweetsAndInstagramQuery" ng-change="getIgandTwitterApiData()">
 
                     </center>
+
+
+                    <center>
+                        <div class="custom-dropdown">
+
+                            <div class="dropdown">
+                                <img class="socialIconSideBar" src="../img/svg/twitter.svg">
+                                <a class="dropdown-toggle" id="drop1" data-toggle="dropdown" href="#" role="button">
+                                    <span>Twitter V2</span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                    <li>{{data}}</li>
+                                    <li role="presentation">
+                                        <a ng-href={{data}} role="menuitem">hashtag</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </center>
+
+
                     <!--
                     <center>
                         <a class="sideBarGhostButton" ng-href="/views/werkspayce.html/spotify-login">
@@ -227,6 +306,28 @@
             sidebarResize();
 
         });
+        $("ul li a").click(function () {
+            $(this).parent().next().toggle("fast");
+        });
+
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
 
     });
 </script>
