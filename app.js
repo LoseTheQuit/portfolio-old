@@ -482,7 +482,6 @@ app.post('/instaInputQuery', function (req, res, next) {
     console.log('START - *** - IG - InputQuery - IG - *** - START'.black.bgGreen);
     console.log(req.body);
 
-
     let inputQueryFromHTML = req.body.query;
 
 
@@ -491,6 +490,7 @@ app.post('/instaInputQuery', function (req, res, next) {
         method: 'GET'
 
     };
+
     var media_search = {
         url: 'https://api.instagram.com/v1/media/search?lat=48.858844&lng=2.294351&access_token=' + instagramAccessCode,
         method: 'GET'
