@@ -484,7 +484,6 @@ app.post('/instaInputQuery', function (req, res, next) {
 
     let inputQueryFromHTML = req.body.query;
 
-
     var from_the_docs = {
         url: 'https://api.instagram.com/v1/tags/nofilter/media/recent?access_token=' + instagramAccessCode,
         method: 'GET'
