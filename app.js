@@ -281,8 +281,6 @@ app.post('/spotify-input-query', function (req, res) {
 
 });
 
-
-
 app.post('/twitter', function (req, res) {
 
     console.log('\n');
