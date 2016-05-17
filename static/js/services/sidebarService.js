@@ -3,8 +3,6 @@
 console.log("INSIDE sideBarService");
 
 angular.module("mainModule")
-    .service('sideBarService', function ($http) {
+    .service('sidebarService', function ($http) {
         console.log("INSIDE sideBarService");
-
-
     });

@@ -117,8 +117,8 @@
         border-radius: 0;
         min-height: auto;
         /*        */
-        width: 80%;
-        height: 50px;
+        width: 90%;
+        height: auto;
         cursor: pointer;
         line-height: 50px;
         display: block;
@@ -128,11 +128,12 @@
         border: 1px solid #fff;
         box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
         text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, .0005);
     }
     
     .custom-dropdown a {
         color: rgba(255, 255, 255, .95);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
     }
     
     .custom-dropdown > li > a {
@@ -180,44 +181,31 @@
         <div id="leftCol">
             <ul class="nav nav-stacked sidebar" id="sidebar">
                 <div class="beaker displayFlex">
-
                     <center>
-
                         <img class="socialIconSideBar" src="../img/svg/search.svg">
-                        <input class="inputBox" type="text" placeholder="#search" ng-model="inputSearchTweetsAndInstagramQuery" ng-change="getIgandTwitterApiData()">
-
+                        <input class="inputBox" type="text" placeholder="#search" ng-model="inputSearchTweetsAndInstagramQuery" ng-change="getAllApiData()">
                     </center>
-
-
+                    <center>
+                        <h3>Filters:</h3>
+                    </center>
                     <center>
                         <div class="custom-dropdown">
-
                             <div class="dropdown">
                                 <img class="socialIconSideBar" src="../img/svg/twitter.svg">
                                 <a class="dropdown-toggle" id="drop1" data-toggle="dropdown" href="#" role="button">
-                                    <span>Twitter V2</span>
+                                    <span>{{getTwitterDropDownOptionText}}</span>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                                    <li>{{data}}</li>
                                     <li role="presentation">
-                                        <a ng-href={{data}} role="menuitem">hashtag</a>
+                                        <a role="menuitem" ng-click="setTwitterDropDownOption(1)">search tweet</a>
+                                        <a role="menuitem" ng-click="setTwitterDropDownOption(2)">user timeline</a>
+                                        <a role="menuitem" ng-click="setTwitterDropDownOption(3)">coming soon</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-
                     </center>
-
-                    <!--
-                    <center>
-                        <a class="sideBarGhostButton" ng-href="/views/werkspayce.html/spotify-login">
-                            <center>
-                                spotify login
-                            </center>
-                        </a>
-                    </center>
-                    -->
                 </div>
             </ul>
         </div>
@@ -272,7 +260,7 @@
                 if (tweetCardWidth <= 101)
                     $('.sidebar').css('width', 300 - 75);
                 else
-                    $('.sidebar').css('width', tweetCardWidth - ((tweetCardShellPaddingRight + tweetCardShellPaddingLeft) * 2));
+                    $('.sidebar').css('width', (tweetCardWidth - ((tweetCardShellPaddingRight + tweetCardShellPaddingLeft) * 3)) / 2);
 
             } else {
 
@@ -292,41 +280,21 @@
 
         }
 
-        // setInterval(function () {
-        //     sidebarResize();
-        // }, 500);
-
         setTimeout(function () {
             sidebarResize();
         }, 1000);
 
-        $(window).resize(function () {
-
+        setTimeout(function () {
             sidebarResize();
+        }, 1500);
 
+        setTimeout(function () {
+            sidebarResize();
+        }, 3000);
+
+        $(window).resize(function () {
+            sidebarResize();
         });
-        $("ul li a").click(function () {
-            $(this).parent().next().toggle("fast");
-        });
-
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function (event) {
-            if (!event.target.matches('.dropbtn')) {
-
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
 
     });
 </script>

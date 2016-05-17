@@ -3,13 +3,13 @@
 console.log("OUTSIDE alloyController");
 
 angular.module("mainModule")
-    .controller('alloyController', function ($scope, instagramService, twitterService, alloy) {
+    .controller('alloyController', function ($scope, instagramService, twitterService, sidebarService, alloy) {
 
         console.log("INSIDE alloyController");
 
         $scope.windowInfoWithToken = instagramService.getWindowInfo();
 
-        $scope.getIgandTwitterApiData = function () {
+        $scope.getAllApiData = function () {
 
             instagramService.tapInstaExtended($scope.windowInfoWithToken, $scope.inputSearchTweetsAndInstagramQuery, function (response) {
 
@@ -18,17 +18,19 @@ angular.module("mainModule")
 
             });
 
-            alloy.getTwitterAndInstagramDataByTags({
+            /////////////////////// console.info(response.data); 
 
-                q: $scope.inputSearchTweetsAndInstagramQuery,
-                count: 20
-
-            }, function (response) {
-
-                var tweets = response.data;
-                console.log(tweets);
-                $scope.twitterData = tweets;
-            });
+            //            alloy.getTwitterAndInstagramDataByTags({
+            //
+            //                q: $scope.inputSearchTweetsAndInstagramQuery,
+            //                count: 20
+            //
+            //            }, function (response) {
+            //
+            //                var tweets = response.data;
+            //                console.log(tweets);
+            //                $scope.twitterData = tweets;
+            //            });
 
             alloy.getSpotifyDATA({
 
@@ -47,6 +49,19 @@ angular.module("mainModule")
                 console.log("_________________________________");
 
             });
+
+            twitterService.getTwitterData({
+
+                q: $scope.inputSearchTweetsAndInstagramQuery,
+                count: 20
+
+            }, function (response) {
+                var tweets = response.data;
+                console.log(tweets);
+                $scope.twitterData = {};
+                $scope.twitterData.data = tweets.statuses;
+
+            })
 
         };
 
@@ -112,12 +127,10 @@ angular.module("mainModule")
 
         };
 
-
         twitterService.getTwitter(function (response) {
-
             var tweets = response.data;
-            console.log(tweets);
             console.log($scope.hideThisDiv);
+
             $scope.twitterData = {};
             $scope.twitterData.data = tweets;
 
@@ -126,9 +139,9 @@ angular.module("mainModule")
         alloy.getSpotify($scope.windowInfoWithToken, function (response) {
 
             $scope.spotifyData = response.data;
-            console.info('getSPOTIFY: ');
-            console.info(response.data);
-            console.info('getSPOTIFY: ');
+
+            console.info('getSPOTIFYDATA: ' +
+                response.data + ' :getSPOTIFYDATA');
 
 
         });

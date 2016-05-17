@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12 tweetCardShell" ng-repeat="tweet in twitterData">
+        <div class="tweetCard addSomeMarginBottom">
+            <div class="cardImage" style="background: url(&quot;{{tweet.user.profile_background_image_url}}&quot;); background-size: cover;">
+                <!--                    cardImage-->
+                <div class="cardImageOverLay add20pxPadding">
+                    <p>TAG SEARCH</p>
+
+                    <div class="tweetCardSpacer"></div>
+                    <div class="igCardHeaderMargin"></div>
+
+                    <div class="col-xs-3 col-md-4 col-lg-4">
+                        <!-- <img class="injectedImage" ng-src="{{data.user.profile_image_url}}"> -->
+                    </div>
+                    <div class="col-xs-9 col-md-8 col-lg-8">
+                        <!-- <p class="screenName">{{data.user.username}}</p> -->
+                    </div>
+
+                    <p class="screenName">{{tweet.user.name}}</p>
+                    <p>{{tweet.user.location}}</p>
+
+                    <!-- <p>{{tweet.user.description}}</p> -->
+                    <p>favourites_count: {{tweet.user.favourites_count}}</p>
+                    <p>friends_count: {{tweet.user.friends_count}}</p>
+                    <p>follcowers_count: {{tweet.user.followers_count}}</p>
+                    <p>Tweets: {{tweet.user.statuses_count}}</p>
+                    <p>{{tweet.text}}</p>
+                    <p>Retweet count: {{tweet.retweet_count}}</p>
+                    <p>{{tweet.created_at}}</p>
+                    <a class="cardLink" ng-href={{tweet.user.url}} target="_blank">{{tweet.user.url}}</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

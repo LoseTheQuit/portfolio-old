@@ -3,8 +3,13 @@
 console.log("OUTSIDE sidebarController");
 
 angular.module("mainModule")
-    .controller('sidebarController', function ($scope, instagramService, twitterService, alloy) {
+    .controller('sidebarController', function ($scope, instagramService, twitterService, sidebarService, alloy) {
         console.log("INSIDE sidebarController");
 
-        $scope.twitterMenuOptions = ['Mark', 'Tom', 'Travis'], ['Mark', 'Tom', 'Travis'], ['Mark', 'Tom', 'Travis'];
+        $scope.getTwitterDropDownOptionText = twitterService.getTwitterDropDownOptionText;
+        $scope.setTwitterDropDownOption = function (optionNumber) {
+            twitterService.setTwitterDropDownOption(optionNumber);
+            $scope.getTwitterDropDownOptionText = twitterService.getTwitterDropDownOptionText;
+            twitterService.getTwitterDropDownOptionNumber = optionNumber;
+        }
     });

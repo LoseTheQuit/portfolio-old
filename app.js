@@ -127,9 +127,9 @@ app.get('/views/werkspayce.html/spotify-login', function (req, res) {
     console.log('START *** spotify-login *** START'.black.bgCyan);
 
     var state = generateRandomString(16);
-    res.cookie(stateKey, state);
-
     var scope = 'user-read-private user-read-email';
+
+    res.cookie(stateKey, state);
 
     console.log('state: ' + state)
     console.log('stateKey: ' + stateKey)
@@ -148,8 +148,6 @@ app.get('/views/werkspayce.html/spotify-login', function (req, res) {
 
 });
 
-
-
 app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
 
     console.log('START ***** spotify-callback *** spotify-callback ***** START'.black.bgCyan);
@@ -158,13 +156,8 @@ app.get('/views/werkspayce.html/spotify-callback', function (req, res) {
     // after checking the state parameter
 
     var code = req.query.code || null;
-    console.log('code: ' + code);
-
     var state = req.query.state || null;
-    console.log('state: ' + state);
-
     var storedState = req.cookies ? req.cookies[stateKey] : null;
-    console.log('storedState: ' + storedState);
 
     if (state === null || state !== storedState) {
 
@@ -301,8 +294,28 @@ app.post('/twitter', function (req, res) {
     });
 
 });
+app.post('/twitterUserTimeQuery', function (req, res) {
 
-app.post('/searchTwitterQuery', function (req, res) {
+    console.log('\n');
+    console.log('START *** TWITTER - INCOMING POST REQUEST - TWITTER *** START'.white.bgBlue);
+    console.log("TWITTER QUERY: " + req.body);
+    console.log("TWITTER QUERY: " + req.body);
+    console.log("TWITTER QUERY: " + req.body);
+    console.log('TWITTER - INCOMING POST REQUEST - TWITTER'.white.bgBlue);
+    console.log('\n');
+
+    twitterClient.get('statuses/user_timeline', req.body, function (error, tweets, response) {
+        if (!error) {
+            res.json(tweets);
+            console.log('END ***** TWITTER - INCOMING POST REQUEST - TWITTER ***** END'.white.bgBlue);
+        } else {
+            res.json(error);
+            console.log(error);
+        }
+    });
+});
+
+app.post('/twitterSearchTweetsQuery', function (req, res) {
     console.log('TWITTER - INPUTQUERY - START - TWITTER'.white.bgBlue);
 
     console.log('\n');
@@ -314,9 +327,10 @@ app.post('/searchTwitterQuery', function (req, res) {
     twitterClient.get('search/tweets', req.body, function (error, tweets, response) {
 
         if (!error) {
-            //console.log(tweets);
             console.log('***** tweets *** SENT *** tweets *****'.white.bgBlue);
             res.json(tweets);
+            console.log(tweets.statuses)
+
         } else {
             res.json(error);
             console.log(error);
