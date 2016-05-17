@@ -288,10 +288,7 @@ app.post('/twitter', function (req, res) {
     console.log('\n');
     console.log('TWITTER - INCOMING POST REQUEST - TWITTER'.white.bgBlue);
 
-    twitterClient.get('statuses/user_timeline', {
-        screen_name: 'nodejs',
-        count: '50'
-    }, function (error, tweets, response) {
+    twitterClient.get('statuses/user_timeline', req.body, function (error, tweets, response) {
 
         if (!error) {
             res.json(tweets);
