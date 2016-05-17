@@ -1,0 +1,142 @@
+<style>
+    .customJumbotron {
+        height: 100vh;
+        color: #005693;
+        background: none, url('http://www.walldevil.com/wallpapers/a79/wallpaper-cartoon-sky-clouds-blue-media.jpg') center center;
+        background: none, url('../img/werkspayce-bg.png') center center;
+        background-size: cover;
+        -webkit-animation: bgMove 1000s infinite;
+        animation: bgMove 1000s infinite;
+    }
+    
+    .customJumbotronOverlay {
+        width: 100%;
+        height: 100%;
+        -webkit-animation: fgMove 400s infinite;
+        animation: fgMove 400s infinite;
+        background: url('../img/customJumbotronoverlay.svg') no-repeat;
+        background-size: cover;
+    }
+    
+    .ghostButton {
+        width: 200px;
+        height: 50px;
+        cursor: pointer;
+        line-height: 50px;
+        display: block;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+        background: rgba(0, 0, 0, .5);
+    }
+    
+    .ghostButton:hover {
+        text-decoration: none;
+        color: #fff;
+        transition: all linear .50s;
+        background: rgba(0, 0, 0, .5);
+    }
+    
+    @-webkit-keyframes bgMove {
+        0% {
+            background-position: 4000px 0;
+        }
+        50% {
+            background-position: -4000px 0;
+        }
+        100% {
+            background-position: 4000px 0;
+        }
+    }
+    
+    @-webkit-keyframes fgMove {
+        0% {
+            background-position: 0 0;
+        }
+        50% {
+            background-position: -1000px 0;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .headLine {
+            text-align: center;
+            margin-bottom: 125px;
+        }
+        .ghostButton {
+            margin: 0 auto;
+            float: none;
+            width: 200px;
+            height: 50px;
+            cursor: pointer;
+            line-height: 50px;
+            display: block;
+            margin-bottom: 25px;
+            margin-top: 25px;
+            color: #fff;
+            border: 1px solid #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+            background: rgba(0, 0, 0, .5);
+        }
+    }
+    
+    .headerheightAdjustments {
+        margin-top: 50px;
+        margin-bottom: 500px;
+    }
+    
+    .headLine {
+        font-size: 40px;
+        color: #fff;
+    }
+</style>
+
+<div class="row customJumbotron" ng-hide="hideThisDiv">
+    <div class="customJumbotronOverlay">
+        <div class="container">
+            <div class="headerheightAdjustments">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div>
+                        <h1 class="headLine">werkspayce</h1>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                    <!-- <a class="ghostButton floatRight" ng-href="{{instagramDataLink}}"> -->
+                    <!--
+                    <a class="ghostButton floatRight" ng-href="http://localhost:5000/instagram-login">
+                        <center>
+                            login
+                        </center>
+                    </a>
+                    <div class="clearFloat"></div>
+                    -->
+
+                    <a class="ghostButton floatRight" ng-href="/views/werkspayce.html/spotify-login">
+                        <center>
+                            login
+                        </center>
+                    </a>
+                    <div class="clearFloat"></div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer">
+                        <p class="footerContent">alpha 1.0.8</p>
+                    </div>
+                    <div class="clearFloat"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

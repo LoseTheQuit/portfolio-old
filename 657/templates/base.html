@@ -1,0 +1,202 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0088cb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Lose The Quit">
+
+    <title>werkspayce</title>
+
+    <link rel="icon" type="image/png" href="//pbiwebprod.blob.core.windows.net/webassets/images/favicon.png">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Gudea:400,400italic' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            background: #00a3e0;
+            color: #fff;
+            font-family: 'Gudea', sans-serif;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+            word-wrap: break-word;
+        }
+        
+        .container {
+            width: 95%;
+        }
+        
+        .theWhiteLine {
+            width: 100%;
+            margin-bottom: 50px;
+            float: left;
+            background: #fff;
+            height: 3px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+        }
+        
+        .floatRight {
+            float: right;
+        }
+        
+        .add20pxPadding {
+            padding: 20px;
+        }
+        
+        .addSomeMarginBottom {
+            margin-bottom: 25px;
+        }
+        
+        .cardImage {
+            transition: all linear 1s;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .cardImage:hover {
+            -webkit-animation: cardImageMove 50s infinite;
+            animation: cardImageMove 50s infinite;
+        }
+        
+        @-webkit-keyframes cardImageMove {
+            0% {
+                background-position: 150 0;
+            }
+            50% {
+                background-position: -50px 0;
+            }
+            100% {
+                background-position: 150 0;
+            }
+        }
+        
+        @-webkit-keyframes spotImageMove {
+            0% {
+                background-position: 150 0;
+            }
+            50% {
+                background-position: 0px 0;
+            }
+            100% {
+                background-position: 150 0;
+            }
+        }
+        
+        .cardImageOverLay {
+            width: 100%;
+            height: 100%;
+            transition: all linear .25s;
+            background: rgba(0, 0, 0, .5);
+        }
+        
+        .cardImageOverLay:hover {
+            width: 100%;
+            height: 100%;
+            transition: all linear .75s;
+            background: rgba(0, 0, 0, .25);
+        }
+        
+        .cardLink {
+            display: block;
+            color: #00a3e0;
+        }
+        
+        .cardLink:hover {
+            text-decoration: none;
+            cursor: pointer;
+            color: rgba(255, 255, 255, .90);
+            transition: all linear 1s;
+            text-decoration: none;
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .footerContent {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            color: #fff;
+            float: right;
+        }
+    </style>
+</head>
+
+<body ng-app="omniantModule" ng-style="customOverFlow()">
+
+    <jumbotron></jumbotron>
+
+    <!--    <omniant></omniant>    -->
+
+    <div class="stickyLine"></div>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-2 col-md-12">
+                <!--  <sidebar></sidebar>  -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/universal/parallax.min.js"></script>
+    <script src="../js/universal/modernizr.custom.min.js"></script>
+
+    <!-- ANGULAR IMPORTS -->
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <script src="../js/omniat.js"></script>
+    <script src="../js/controllers/omniantController.js"></script>
+    <script src="../js/controllers/jumbotronController.js"></script>
+    <script src="../js/directives/omniantDirective.js"></script>
+    <script src="../js/directives/jumbotronDirective.js"></script>
+    <script src="../js/services/omniantService.js"></script>
+    <script src="../js/services/jumbotronService.js"></script>
+
+    <!-- ANGULAR IMPORTS -->
+
+    <!--
+    <script src="../js/main.js"></script>
+    <script src="../js/controllers/alloyController.js"></script>
+    <script src="../js/controllers/twitterController.js"></script>
+    <script src="../js/controllers/instagramController.js"></script>
+    <script src="../js/controllers/spotifyController.js"></script>
+    <script src="../js/controllers/sidebarController.js"></script>
+
+    <script src="../js/directives/jumbotronDirective.js"></script>
+    <script src="../js/directives/instagramDirective.js"></script>
+    <script src="../js/directives/twitterDirective.js"></script>
+    <script src="../js/directives/spotifyDirective.js"></script>
+    <script src="../js/directives/sidebarDirective.js"></script>
+    <script src="../js/services/instagramService.js"></script>
+    <script src="../js/services/twitterService.js"></script>
+    <script src="../js/services/sidebarService.js"></script>
+    <script src="../js/services/alloy.js"></script>
+    <script src="../js/universal/werkspayce.js"></script>
+    -->
+
+    <!-- ANGULAR IMPORTS -->
+
+
+
+
+
+</body>
+
+</html>
